@@ -152,3 +152,34 @@ h1, h2, h3, h4, h5, h6, .brand-font {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Leaflet Map Branded Customizations */
+.custom-map-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.custom-map-pin:hover {
+  transform: scale(1.18) translateY(-2px);
+  z-index: 9999 !important;
+}
+.leaflet-popup-content-wrapper {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.6) !important;
+  padding: 4px !important;
+}
+.leaflet-popup-content {
+  margin: 14px 16px !important;
+  line-height: 1.4 !important;
+}
+.leaflet-popup-tip {
+  background: #0f172a !important;
+  border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+.leaflet-container {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}

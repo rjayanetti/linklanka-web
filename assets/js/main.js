@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- MODALS & FORMS ---
   initModals();
+
+  // --- INTERACTIVE HOME BRANCH MAP ---
+  initHomeMap();
 });
 
 // Interactive Digital Taxi Meter Simulator
@@ -306,4 +309,76 @@ function initModals() {
       toast.classList.remove('translate-y-0', 'opacity-100');
     }, 4500);
   }
+}
+
+// Interactive Home Page Branch Map
+function initHomeMap() {
+  const mapEl = document.getElementById('homeBranchMap');
+  if (!mapEl || typeof L === 'undefined') return;
+
+  const map = L.map('homeBranchMap', {
+    center: [7.8731, 80.7718],
+    zoom: 7,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  fetch('assets/data/locations.json')
+    .then(r => r.json())
+    .then(locations => {
+      const bounds = [];
+      locations.forEach(loc => {
+        const lat = parseFloat(loc.lat);
+        const lon = parseFloat(loc.lon);
+        if (!lat || !lon || lat < 5 || lon < 79) return;
+
+        bounds.push([lat, lon]);
+        const isBranch = (loc.location_type === 1);
+        const colorBg = isBranch ? '#F59E0B' : '#10B981';
+        const badgeText = isBranch ? 'Official Branch' : 'Authorized Dealer';
+        const badgeBg = isBranch ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500 text-white font-black';
+
+        const customIcon = L.divIcon({
+          className: 'custom-map-pin',
+          html: `
+            <div style="background-color: ${colorBg}; width: 28px; height: 28px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid #ffffff;">
+              <svg style="transform: rotate(45deg); width: 14px; height: 14px; color: ${isBranch ? '#0f172a' : '#ffffff'};" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 28],
+          popupAnchor: [0, -26]
+        });
+
+        const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
+        const p1 = (loc.phone_no1 || '').trim();
+
+        const popupHtml = `
+          <div class="text-left font-sans text-xs">
+            <span class="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider ${badgeBg} inline-block mb-1">
+              ${badgeText}
+            </span>
+            <h4 class="font-extrabold text-sm text-white mb-0.5">${loc.name || 'LINK LANKA'}</h4>
+            <p class="text-slate-300 leading-snug mb-2">${cleanAddr}</p>
+            <div class="flex items-center space-x-2 pt-1.5 border-t border-slate-700/80">
+              ${p1 ? `<a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-2 py-1 rounded-md text-[11px] shadow">📞 ${p1}</a>` : ''}
+              <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-md text-[11px]">📍 Directions</a>
+            </div>
+          </div>
+        `;
+
+        L.marker([lat, lon], { icon: customIcon }).addTo(map).bindPopup(popupHtml);
+      });
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [30, 30] });
+      }
+    })
+    .catch(err => console.error('Error loading home map locations:', err));
 }

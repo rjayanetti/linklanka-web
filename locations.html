@@ -28,6 +28,9 @@
     }
   </script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet CSS & JS for Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-black">
@@ -128,33 +131,39 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="bg-slate-950 rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-800">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 mb-4 gap-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 mb-4 gap-3">
           <div>
             <h2 class="text-xl font-black text-amber-400">Interactive Branch Network Map</h2>
-            <p class="text-xs text-slate-400">Live map feed from Link Lanka location system</p>
+            <p class="text-xs text-slate-400">Live locations across Sri Lanka powered by Link Lanka Location System</p>
           </div>
-          <div class="flex items-center space-x-2 text-xs">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-emerald-400 font-bold">40+ Authorized Locations Active</span>
+          <div class="flex flex-wrap items-center gap-3 text-xs">
+            <div class="flex items-center space-x-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-amber-400 font-bold">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block shadow"></span>
+              <span>Official Branches</span>
+            </div>
+            <div class="flex items-center space-x-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-emerald-400 font-bold">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block shadow"></span>
+              <span>Authorized Dealers</span>
+            </div>
+            <div class="flex items-center space-x-1.5 text-slate-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="text-emerald-400 font-bold">40+ Active Locations</span>
+            </div>
           </div>
         </div>
 
-        <!-- Embedded Map Container -->
-        <div class="w-full h-[550px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 relative">
-          <iframe 
-            src="http://api.linklanka.lk/link/location/map" 
-            title="Link Lanka Branch Network Map"
-            class="w-full h-full border-0" 
-            loading="lazy">
-          </iframe>
-        </div>
+        <!-- Interactive Leaflet Map Container -->
+        <div id="branchMap" class="w-full h-[550px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 relative z-0"></div>
 
         <div class="mt-4 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-          <span>Click any marker on the map to view the branch name, address, and phone number.</span>
-          <a href="http://api.linklanka.lk/link/location/map" target="_blank" rel="noopener" class="text-amber-400 hover:underline flex items-center space-x-1">
-            <span>Open Map in Full Screen</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          </a>
+          <div class="flex items-center space-x-2">
+            <i data-lucide="info" class="w-4 h-4 text-amber-400 shrink-0"></i>
+            <span>Click any marker on the map to view branch name, address, telephone numbers, and directions.</span>
+          </div>
+          <button id="resetMapBtn" class="text-amber-400 hover:text-amber-300 font-bold flex items-center space-x-1 cursor-pointer">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Reset Map View (Fit All)</span>
+          </button>
         </div>
       </div>
 
@@ -200,38 +209,164 @@
   <script>
     lucide.createIcons();
 
-    // Load locations into grid
+    let map = null;
+    const markersMap = {};
+    let allBounds = [];
+
+    function initBranchMap(locations) {
+      const mapEl = document.getElementById('branchMap');
+      if (!mapEl || typeof L === 'undefined') return;
+
+      map = L.map('branchMap', {
+        center: [7.8731, 80.7718],
+        zoom: 8,
+        scrollWheelZoom: false
+      });
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      allBounds = [];
+
+      locations.forEach((loc, idx) => {
+        const lat = parseFloat(loc.lat);
+        const lon = parseFloat(loc.lon);
+        if (!lat || !lon || lat < 5 || lon < 79) return;
+
+        allBounds.push([lat, lon]);
+
+        const isBranch = (loc.location_type === 1);
+        const colorBg = isBranch ? '#F59E0B' : '#10B981';
+        const badgeText = isBranch ? 'Official Branch' : 'Authorized Dealer';
+        const badgeBg = isBranch ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500 text-white font-black';
+
+        const customIcon = L.divIcon({
+          className: 'custom-map-pin',
+          html: `
+            <div style="background-color: ${colorBg}; width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2.5px solid #ffffff;">
+              <svg style="transform: rotate(45deg); width: 16px; height: 16px; color: ${isBranch ? '#0f172a' : '#ffffff'};" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>`,
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30]
+        });
+
+        const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
+        const p1 = (loc.phone_no1 || '').trim();
+        const p2 = (loc.phone_no2 || '').trim();
+
+        const popupHtml = `
+          <div class="text-left font-sans text-xs">
+            <div class="flex items-center space-x-1.5 mb-1.5">
+              <span class="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider ${badgeBg}">
+                ${badgeText}
+              </span>
+            </div>
+            <h4 class="font-extrabold text-sm text-white mb-1">${loc.name || 'LINK LANKA'}</h4>
+            <p class="text-slate-300 leading-snug mb-3">${cleanAddr}</p>
+            <div class="pt-2 border-t border-slate-700/80 flex flex-wrap gap-1.5">
+              ${p1 ? `<a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1 shadow">
+                <span>📞 ${p1}</span>
+              </a>` : ''}
+              ${p2 && p2 !== p1 ? `<a href="tel:${p2}" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1">
+                <span>📞 ${p2}</span>
+              </a>` : ''}
+              <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1">
+                <span>📍 Directions</span>
+              </a>
+            </div>
+          </div>
+        `;
+
+        const marker = L.marker([lat, lon], { icon: customIcon }).addTo(map).bindPopup(popupHtml);
+        markersMap[idx] = marker;
+      });
+
+      if (allBounds.length > 0) {
+        map.fitBounds(allBounds, { padding: [40, 40] });
+      }
+
+      const resetBtn = document.getElementById('resetMapBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (map && allBounds.length > 0) {
+            map.fitBounds(allBounds, { padding: [40, 40] });
+          }
+        });
+      }
+    }
+
+    window.focusBranchOnMap = function(idx) {
+      const marker = markersMap[idx];
+      if (marker && map) {
+        const el = document.getElementById('branchMap');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        setTimeout(() => {
+          map.setView(marker.getLatLng(), 15, { animate: true });
+          marker.openPopup();
+        }, 400);
+      }
+    };
+
+    // Load locations into grid & map
     fetch('assets/data/locations.json')
       .then(r => r.json())
       .then(locations => {
+        initBranchMap(locations);
+
         const grid = document.getElementById('branchListGrid');
         const search = document.getElementById('branchSearch');
         if (!grid) return;
 
         function render(list) {
-          grid.innerHTML = list.map(loc => {
-            const cleanAddr = (loc.address || '').replace(/\\n/g, ', ');
+          grid.innerHTML = list.map((loc, idx) => {
+            const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
             const p1 = (loc.phone_no1 || '').trim();
             const p2 = (loc.phone_no2 || '').trim();
+            const lat = parseFloat(loc.lat);
+            const lon = parseFloat(loc.lon);
+            const hasGps = (lat && lon && lat > 5 && lon > 79);
+            const isBranch = (loc.location_type === 1);
+
             return `
-              <div class="branch-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                <div class="flex items-start justify-between">
-                  <h4 class="font-extrabold text-slate-900 text-sm">${loc.name || 'LINK LANKA'}</h4>
-                  <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">BRANCH</span>
+              <div class="branch-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                <div>
+                  <div class="flex items-start justify-between gap-2">
+                    <h4 class="font-extrabold text-slate-900 text-sm">${loc.name || 'LINK LANKA'}</h4>
+                    <span class="text-[10px] ${isBranch ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'} font-bold px-2 py-0.5 rounded shrink-0">
+                      ${isBranch ? 'OFFICIAL BRANCH' : 'DEALER'}
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-600 mt-2 flex items-start space-x-1.5">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i>
+                    <span>${cleanAddr}</span>
+                  </p>
                 </div>
-                <p class="text-xs text-slate-600 mt-2 flex items-start space-x-1.5">
-                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i>
-                  <span>${cleanAddr}</span>
-                </p>
-                <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap gap-2 text-xs">
-                  ${p1 ? `<a href="tel:${p1}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
-                    <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
-                    <span>${p1}</span>
-                  </a>` : ''}
-                  ${p2 && p2 !== p1 ? `<a href="tel:${p2}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
-                    <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
-                    <span>${p2}</span>
-                  </a>` : ''}
+                
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs gap-2">
+                  <div class="flex flex-wrap gap-1.5">
+                    ${p1 ? `<a href="tel:${p1}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
+                      <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
+                      <span>${p1}</span>
+                    </a>` : ''}
+                    ${p2 && p2 !== p1 ? `<a href="tel:${p2}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
+                      <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
+                      <span>${p2}</span>
+                    </a>` : ''}
+                  </div>
+                  ${hasGps ? `
+                    <button onclick="focusBranchOnMap(${idx})" class="text-amber-600 hover:text-amber-700 font-bold text-xs flex items-center space-x-1 cursor-pointer shrink-0">
+                      <span>View on Map</span>
+                      <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                  ` : ''}
                 </div>
               </div>
             `;
