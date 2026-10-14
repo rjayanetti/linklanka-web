@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Yards & Nationwide Dealer Network | Link Lanka</title>
+  <meta name="description" content="Find Link Lanka's 9 dedicated service yards and 150+ authorized dealer points across Sri Lanka for taxi meter installation, calibration, and maintenance.">
+  <link rel="shortcut icon" href="assets/img/logo-linklanka-badge.png" type="image/png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#FFCC00',
+              gold: '#F59E0B',
+              dark: '#0B0F19',
+              darker: '#060910',
+              card: '#131B2E',
+              accent: '#10B981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-black">
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-50 nav-glass text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20">
+            <img src="assets/img/logo-linklanka-badge.png" alt="Link Lanka Logo" class="w-full h-full object-contain rounded-[10px] bg-slate-950 p-1">
+          </div>
+          <div>
+            <div class="flex items-baseline space-x-1">
+              <span class="text-2xl font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">LINK</span>
+              <span class="text-2xl font-black tracking-tight text-amber-400">LANKA</span>
+            </div>
+            <p class="text-[10px] tracking-widest text-slate-400 uppercase font-bold">ශ්‍රී ලංකාවේ අංක 1 ටැක්සි මීටරය</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+          <a href="index.html" class="text-slate-300 hover:text-amber-400 transition-colors">Home</a>
+          <a href="products.html" class="text-slate-300 hover:text-amber-400 transition-colors">Products</a>
+          <a href="index.html#meter-demo" class="text-slate-300 hover:text-amber-400 transition-colors">Live Meter Demo</a>
+          <a href="service-network.html" class="text-amber-400 hover:text-amber-300 transition-colors">Service Yards</a>
+          <a href="about.html" class="text-slate-300 hover:text-amber-400 transition-colors">About Us</a>
+          <a href="contact.html" class="text-slate-300 hover:text-amber-400 transition-colors">Contact</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center space-x-3">
+          <a href="tel:1314" class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-3.5 py-2 rounded-lg text-xs font-bold transition-colors">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>1314</span>
+          </a>
+        </div>
+
+        <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center space-x-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 rounded-full text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">
+        20,000+ Taxis Serviced Monthly
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white">
+        Nationwide Service Yards & Authorized Dealers
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto mt-3">
+        With 9 dedicated company yards and 150+ trained dealer technicians across Sri Lanka, you never have to lose a day’s hire for meter repairs, recertification, or receipt paper rolls.
+      </p>
+
+      <!-- Live Search Box -->
+      <div class="max-w-xl mx-auto mt-8">
+        <div class="relative">
+          <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+          <input id="yardSearchInput" type="text" placeholder="Search by town, region, or yard name (e.g. Malabe, Kandy, Ja-Ela)..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400 text-sm shadow-xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Capabilities Bar -->
+  <section class="bg-amber-400 text-slate-950 py-6 border-y border-amber-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div>
+          <span class="block text-2xl font-black">20 Mins</span>
+          <span class="text-xs font-bold uppercase">Average Calibration Turnaround</span>
+        </div>
+        <div>
+          <span class="block text-2xl font-black">100% Genuine</span>
+          <span class="text-xs font-bold uppercase">Japanese Spec Spare Parts</span>
+        </div>
+        <div>
+          <span class="block text-2xl font-black">Official Seal</span>
+          <span class="text-xs font-bold uppercase">Weights & Measures Approved</span>
+        </div>
+        <div>
+          <span class="block text-2xl font-black">Hotline 1314</span>
+          <span class="text-xs font-bold uppercase">Immediate Technical Guidance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Yards Grid -->
+  <section class="py-20 bg-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+        <button data-filter="all" class="yard-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-amber-400 text-gray-900 shadow">
+          All 9 Company Yards
+        </button>
+        <button data-filter="colombo" class="yard-filter-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">
+          Colombo & Suburbs
+        </button>
+        <button data-filter="western" class="yard-filter-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">
+          Gampaha & Kalutara
+        </button>
+        <button data-filter="kandy-outstation" class="yard-filter-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">
+          Kandy & Wayamba
+        </button>
+      </div>
+
+      <!-- 9 Dedicated Yards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- 1. Kirulapona -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="colombo">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-kirulapona.png" alt="Kirulapona Head Office Yard" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-amber-400 text-slate-950 font-black text-[10px] uppercase px-2.5 py-1 rounded shadow">
+              HEAD OFFICE & MAIN SERVICE CENTRE
+            </span>
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Kirulapona Main Service Centre</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>No. 38 Kirulapone Avenue, Colombo 05 / 06</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Working Hours:</span>
+                <span class="font-bold text-slate-800">Mon - Sat: 8:00 AM - 6:00 PM</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Facilities:</span>
+                <span class="font-semibold text-emerald-600">Calibration, Print Head, Full Spares</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Direct Line:</span>
+                <a href="tel:1314" class="font-bold text-amber-600 hover:underline">1314 / 011-251-xxxx</a>
+              </div>
+            </div>
+            <a href="contact.html?yard=kirulapona" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Katuwawala -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="colombo">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-katuwawala.png" alt="Katuwawala Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Katuwawala Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Katuwawala Main Road, Boralesgamuwa, Piliyandala Area</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Working Hours:</span>
+                <span class="font-bold text-slate-800">Mon - Sat: 8:30 AM - 5:30 PM</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">3-Wheeler Meter Setup & Seal</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=katuwawala" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Thalahena -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="colombo">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-thalahena.png" alt="Thalahena Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Thalahena Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Malabe - Thalahena Junction, Malabe, Battaramulla</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Working Hours:</span>
+                <span class="font-bold text-slate-800">Mon - Sat: 8:30 AM - 5:30 PM</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Recalibration & Receipt Roll Stocks</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=thalahena" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Ja-Ela -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="western">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-jaela.png" alt="Ja-Ela Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Ja-Ela Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Colombo - Negombo Main Road, Ja-Ela</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Coverage:</span>
+                <span class="font-bold text-slate-800">Airport Taxis, Negombo, Kandana</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Cab & Van Meter Specialists</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=jaela" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. Kadawatha -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="western">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-kadawatha.png" alt="Kadawatha Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Kadawatha Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Kandy Road, near Kadawatha Interchange</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Highway Access:</span>
+                <span class="font-bold text-slate-800">Central Expressway Gateway</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Rapid Sealing & Wiring Kits</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=kadawatha" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. Peradeniya (Kandy) -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="kandy-outstation">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-peradeniya.png" alt="Peradeniya Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Peradeniya Yard (Kandy)</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Peradeniya Junction, Kandy Central Province</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Region:</span>
+                <span class="font-bold text-slate-800">Central Province Headquarters</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Hill-Country Pulse Calibration</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=peradeniya" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. Katuneriya -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="kandy-outstation">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-katuneriya.png" alt="Katuneriya Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Katuneriya Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Chilaw Main Rd, Katuneriya (Puttalam District)</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Region:</span>
+                <span class="font-bold text-slate-800">Wayamba / North Western Hub</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Corrosion-Proof Bracket Mounts</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=katuneriya" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. Horana -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="western">
+          <div class="h-48 bg-slate-900 relative">
+            <img src="assets/img/yard-horana.png" alt="Horana Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Horana Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Panadura - Horana Main Rd, Horana</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Region:</span>
+                <span class="font-bold text-slate-800">Kalutara District</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Quick Fare Recalibration</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=horana" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+        <!-- 9. Wadduwa -->
+        <div class="yard-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md hover-lift" data-region="western">
+          <div class="h-48 bg-slate-900 relative flex items-center justify-center p-4">
+            <img src="assets/img/metered-taxi-board.png" alt="Wadduwa Yard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 space-y-4">
+            <h3 class="yard-title text-xl font-bold text-slate-900">Wadduwa Service Yard</h3>
+            <p class="yard-address text-xs text-slate-600 flex items-start space-x-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>Galle Road, Wadduwa Coastal Corridor</span>
+            </p>
+            <div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
+              <div class="flex items-center justify-between">
+                <span>Focus:</span>
+                <span class="font-bold text-slate-800">South Coast Tourism Taxis</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Services:</span>
+                <span class="font-semibold text-emerald-600">Rooftop LED Signs & Printer Slips</span>
+              </div>
+            </div>
+            <a href="contact.html?yard=wadduwa" class="block text-center w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors">
+              Book Service Slot
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 text-sm py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="text-xl font-black text-white">LINK <span class="text-amber-400">LANKA</span></span>
+        <span class="text-xs text-slate-500">| Quality Taxi Electronics Since 2008</span>
+      </div>
+      <div class="text-xs text-slate-500">
+        Hotline: <a href="tel:1314" class="text-amber-400 font-bold">1314</a> • Kirulapone Avenue, Colombo 06
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

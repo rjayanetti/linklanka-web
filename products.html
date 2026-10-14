@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products & Equipment Catalog | Link Lanka Digital Taxi Meters</title>
+  <meta name="description" content="Explore Link Lanka's full range of Presidential Award-winning taxi meters, thermal printer meters, GPS telematics units, electronic pulse sensors, and taxi accessories.">
+  <link rel="shortcut icon" href="assets/img/logo-linklanka-badge.png" type="image/png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#FFCC00',
+              gold: '#F59E0B',
+              dark: '#0B0F19',
+              darker: '#060910',
+              card: '#131B2E',
+              accent: '#10B981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-black">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-slate-950 text-amber-300 text-xs py-2 px-4 border-b border-amber-500/20">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-black">ISO 9001:2008</span>
+        <span class="text-slate-300 font-medium">Japanese Technology Partnership • Biyagama FTZ</span>
+      </div>
+      <div class="flex items-center space-x-4 text-xs font-semibold">
+        <a href="tel:1314" class="text-amber-400 hover:text-amber-300 flex items-center space-x-1">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+          <span>Hotline: 1314</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-50 nav-glass text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20">
+            <img src="assets/img/logo-linklanka-badge.png" alt="Link Lanka Logo" class="w-full h-full object-contain rounded-[10px] bg-slate-950 p-1">
+          </div>
+          <div>
+            <div class="flex items-baseline space-x-1">
+              <span class="text-2xl font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">LINK</span>
+              <span class="text-2xl font-black tracking-tight text-amber-400">LANKA</span>
+            </div>
+            <p class="text-[10px] tracking-widest text-slate-400 uppercase font-bold">ශ්‍රී ලංකාවේ අංක 1 ටැක්සි මීටරය</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+          <a href="index.html" class="text-slate-300 hover:text-amber-400 transition-colors">Home</a>
+          <a href="products.html" class="text-amber-400 hover:text-amber-300 transition-colors">Products</a>
+          <a href="index.html#meter-demo" class="text-slate-300 hover:text-amber-400 transition-colors">Live Meter Demo</a>
+          <a href="service-network.html" class="text-slate-300 hover:text-amber-400 transition-colors">Service Yards</a>
+          <a href="about.html" class="text-slate-300 hover:text-amber-400 transition-colors">About Us</a>
+          <a href="contact.html" class="text-slate-300 hover:text-amber-400 transition-colors">Contact</a>
+        </nav>
+
+        <div class="hidden lg:flex items-center space-x-3">
+          <a href="tel:1314" class="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-3.5 py-2 rounded-lg text-xs font-bold transition-colors">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>1314</span>
+          </a>
+          <a href="contact.html" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-sm transition-all shadow-md">
+            Order / Inquire
+          </a>
+        </div>
+
+        <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3">
+      <a href="index.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Home</a>
+      <a href="products.html" class="block py-2 text-amber-400 font-semibold">Products & Equipment</a>
+      <a href="index.html#meter-demo" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Live Meter Simulator</a>
+      <a href="service-network.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Service Yards (Islandwide)</a>
+      <a href="about.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">About Link Lanka</a>
+      <a href="contact.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Contact & Support</a>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center space-x-2 bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 rounded-full text-xs font-bold text-amber-400 uppercase tracking-wider mb-4">
+        Manufactured in Sri Lanka under Japanese Quality Standards
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white">
+        Product Portfolio & Technical Specifications
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto mt-3">
+        From digital taxi meters with thermal ticket printers to enterprise GPS fleet telematics, every device is engineered for maximum accuracy, tropical durability, and anti-tampering security.
+      </p>
+    </div>
+  </section>
+
+  <!-- Product 1: Flagship Thermal Printer Taxi Meter -->
+  <section id="printer-meter" class="py-20 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-5">
+          <div class="inline-flex items-center space-x-2 bg-amber-100 text-amber-900 px-3 py-1 rounded-full text-xs font-bold uppercase">
+            Flagship Model • Legal Receipt Ready
+          </div>
+          <h2 class="text-3xl font-black text-slate-900">
+            Link Digital Taxi Meter with Thermal Printer
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed">
+            The national standard for metered three-wheelers, sedans, and minivans. Includes an internal high-speed thermal slip printer that produces instant receipts for passengers showing fare calculation, distance, waiting time, and vehicle license plate.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="block text-slate-400 font-bold uppercase">Display</span>
+              <span class="font-extrabold text-slate-800 text-sm">Dual High-Contrast LED</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="block text-slate-400 font-bold uppercase">Sensor</span>
+              <span class="font-extrabold text-slate-800 text-sm">Digital Tacho-Pulse</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="block text-slate-400 font-bold uppercase">Printer</span>
+              <span class="font-extrabold text-slate-800 text-sm">57mm Direct Thermal</span>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+              <span class="block text-slate-400 font-bold uppercase">Input Voltage</span>
+              <span class="font-extrabold text-slate-800 text-sm">9V - 16V DC Automotive</span>
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-4">
+            <a href="contact.html?product=printer-meter" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl text-sm shadow-md">
+              Order at Nearest Yard
+            </a>
+            <a href="tel:1314" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-6 py-3 rounded-xl text-sm border border-slate-300">
+              📞 Dial 1314 for Pricing
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="bg-slate-950 rounded-3xl p-6 shadow-2xl border border-slate-800">
+            <img src="assets/img/product-meter-printer.jpg" alt="Link Meter with Printer" class="w-full h-80 object-cover rounded-2xl">
+            <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
+              <span>Standard 1-Year Comprehensive Warranty</span>
+              <span class="text-amber-400 font-semibold">Government Certified Calibration</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product 2: Compact Three-Wheeler Meter -->
+  <section id="compact-meter" class="py-20 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="bg-slate-950 rounded-3xl p-6 shadow-2xl border border-slate-800">
+            <img src="assets/img/product-meter-front.jpg" alt="Link Compact Meter Front" class="w-full h-80 object-cover rounded-2xl">
+            <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
+              <span>Weather-Sealed Front Face</span>
+              <span class="text-emerald-400 font-semibold">Tuk-Tuk Bracket Included</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 order-1 lg:order-2 space-y-5">
+          <div class="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-900 px-3 py-1 rounded-full text-xs font-bold uppercase">
+            Slim & Vibration Resistant
+          </div>
+          <h2 class="text-3xl font-black text-slate-900">
+            Link Compact Three-Wheeler Meter
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed">
+            Engineered exclusively for the harsh vibration and dust conditions of Sri Lankan auto rickshaws. Fits snugly onto the handlebar or dashboard without obstructing the rider’s view.
+          </p>
+
+          <ul class="space-y-2 text-xs text-slate-700">
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+              <span>High-luminosity numeric readout visible under direct equatorial sunlight</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+              <span>Low standby power draw prevents vehicle battery drainage</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+              <span>Reverse voltage & surge spike protection</span>
+            </li>
+          </ul>
+
+          <div class="pt-2 flex flex-wrap gap-4">
+            <a href="contact.html?product=compact" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl text-sm shadow-md">
+              Check Installation Availability
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product 3: GPS Fleet Tracker -->
+  <section id="gps-tracker" class="py-20 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-6 space-y-5">
+          <div class="inline-flex items-center space-x-2 bg-blue-100 text-blue-900 px-3 py-1 rounded-full text-xs font-bold uppercase">
+            First Locally Made GPS Tracker
+          </div>
+          <h2 class="text-3xl font-black text-slate-900">
+            Link GPS Vehicle Tracker & Fleet Telematics
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed">
+            Sri Lanka’s first locally manufactured automotive GPS tracker. Integrated with the Dialog B-in Touch network and modern fleet management software. Enables taxi dispatch, geofencing, fuel analytics, and speed monitoring.
+          </p>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="font-bold text-slate-900">Live Geolocation</span>
+              <p class="text-slate-500 text-[11px]">Real-time tracking every 5 seconds</p>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="font-bold text-slate-900">Engine Immobilizer</span>
+              <p class="text-slate-500 text-[11px]">Remote engine cutoff via SMS/App</p>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="font-bold text-slate-900">Speed Alarms</span>
+              <p class="text-slate-500 text-[11px]">Instant alert on over-speeding</p>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="font-bold text-slate-900">SOS Button</span>
+              <p class="text-slate-500 text-[11px]">Direct emergency call trigger</p>
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-4">
+            <a href="contact.html?product=gps" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm shadow-md">
+              Request Corporate Fleet Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="bg-slate-950 rounded-3xl p-8 shadow-2xl border border-slate-800 flex flex-col items-center justify-center">
+            <img src="assets/img/prod-gps-tracker.jpg" alt="GPS Vehicle Tracker Unit" class="h-64 object-contain">
+            <span class="text-xs text-slate-400 mt-4">Made in Sri Lanka • Japanese Micro-Components</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Specifications Comparison Table -->
+  <section class="py-20 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-extrabold text-white">Technical Specifications Matrix</h2>
+        <p class="text-slate-400 text-sm mt-2">Compare our models and find the exact solution tailored to your vehicle type.</p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-950 rounded-2xl overflow-hidden border border-slate-800">
+          <thead>
+            <tr class="bg-slate-800/80 text-amber-400 border-b border-slate-700">
+              <th class="p-4 font-bold">Feature / Specification</th>
+              <th class="p-4 font-bold">Link Meter + Thermal Printer</th>
+              <th class="p-4 font-bold">Link Compact Meter</th>
+              <th class="p-4 font-bold">Link GPS Telematics Unit</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-slate-300">
+            <tr>
+              <td class="p-4 font-bold text-white">Target Vehicles</td>
+              <td class="p-4">Three-wheelers, Cabs, Vans, Budget Taxis</td>
+              <td class="p-4">Auto Rickshaws, Three-wheelers</td>
+              <td class="p-4">Private Cars, Cabs, Logistics Trucks</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Passenger Receipt</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Built-in Thermal Slip</td>
+              <td class="p-4 text-slate-500">Optional External Add-on</td>
+              <td class="p-4 text-slate-500">Digital SMS / App E-Receipt</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Distance Calculation</td>
+              <td class="p-4">Patented Tacho Pulse Sensor</td>
+              <td class="p-4">Patented Tacho Pulse Sensor</td>
+              <td class="p-4">GPS Satellite + Tacho Hybrid</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Display Type</td>
+              <td class="p-4">High-Contrast Dual LED</td>
+              <td class="p-4">High-Luminance LED Numeric</td>
+              <td class="p-4">Smartphone App / Web Cloud</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Rooftop Taxi Sign Output</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Automated Switching</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Automated Switching</td>
+              <td class="p-4 text-slate-500">N/A</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Government Sealing Slot</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Compliant Official Wire Seal</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Compliant Official Wire Seal</td>
+              <td class="p-4 text-emerald-400 font-bold">✓ Tamper Alert Trigger</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Warranty</td>
+              <td class="p-4 text-amber-400 font-bold">1 Year Full Warranty</td>
+              <td class="p-4 text-amber-400 font-bold">1 Year Full Warranty</td>
+              <td class="p-4 text-amber-400 font-bold">1 Year Full Warranty</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 text-sm py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="text-xl font-black text-white">LINK <span class="text-amber-400">LANKA</span></span>
+        <span class="text-xs text-slate-500">| Quality Taxi Electronics Since 2008</span>
+      </div>
+      <div class="text-xs text-slate-500">
+        Hotline: <a href="tel:1314" class="text-amber-400 font-bold">1314</a> • Kirulapone Avenue, Colombo 06
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
