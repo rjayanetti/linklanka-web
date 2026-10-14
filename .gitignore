@@ -1,9 +1,11 @@
-# Ignore heavy root raw camera files and archives
-/company profile .pdf
-/*.JPG
-/extracted_images/
-/*.rar
-/*.zip
+# Ignore raw original files and archive directory
+Source artifacts/
+/Source artifacts/
+company profile .pdf
+*.JPG
+extracted_images/
+*.rar
+*.zip
 
 # Always include web assets
 !assets/
