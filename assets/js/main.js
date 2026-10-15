@@ -164,7 +164,7 @@ function initMeterSimulator() {
       <div class="text-center border-b border-dashed border-gray-400 pb-3 mb-3">
         <h4 class="font-extrabold text-lg tracking-wider">LINK LANKA (PVT) LTD</h4>
         <p class="text-xs text-gray-600">PIONEER IN DIGITAL TAXI METERS</p>
-        <p class="text-xs text-gray-500">HOTLINE: 1314 | www.linklanka.lk</p>
+        <p class="text-xs text-gray-500">HOTLINE: 0117177277 | www.linklanka.lk</p>
         <p class="text-[11px] text-gray-500 mt-1">ISO 9001-2008 CERTIFIED MANUFACTURE</p>
       </div>
 
