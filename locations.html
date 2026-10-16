@@ -153,7 +153,7 @@
             </div>
             <div class="flex items-center space-x-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-emerald-400 font-bold">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block shadow"></span>
-              <span>Authorized Dealers</span>
+              <span>Authorised Agents</span>
             </div>
             <div class="flex items-center space-x-1.5 text-slate-300">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -190,7 +190,7 @@
           <span>Live Location Directory</span>
         </div>
         <h3 class="text-2xl sm:text-3xl font-black text-slate-900">Branch & Agent Directory</h3>
-        <p class="text-slate-600 text-xs mt-1">Direct contact numbers and operating schedules for all Link Lanka branches and authorized dealers island-wide.</p>
+        <p class="text-slate-600 text-xs mt-1">Direct contact numbers and operating schedules for all Link Lanka branches and authorised agents island-wide.</p>
         
         <!-- Live Search Bar -->
         <div class="mt-5 max-w-md mx-auto">
@@ -211,7 +211,7 @@
             <span id="countBranch" class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.2 rounded font-bold">11</span>
           </button>
           <button id="filterAgentBtn" onclick="setCategoryFilter('agent')" class="category-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition-all flex items-center space-x-1.5">
-            <span>Authorized Dealers</span>
+            <span>Authorised Agents</span>
             <span id="countAgent" class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.2 rounded font-bold">31</span>
           </button>
         </div>
@@ -360,7 +360,7 @@
           });
         }
 
-        // 2. Process Authorized Dealers (Sheet: Agent List)
+        // 2. Process Authorised Agents (Sheet: Agent List)
         const agentSheetName = wb.SheetNames.find(n => n.toLowerCase().includes('agent')) || wb.SheetNames[0];
         if (agentSheetName && wb.Sheets[agentSheetName]) {
           const rows = XLSX.utils.sheet_to_json(wb.Sheets[agentSheetName], { defval: '' });
@@ -375,7 +375,7 @@
               lon: parseFloat(r.Longitude) || 0,
               lat: parseFloat(r.Latitude) || 0,
               photo: String(r.Photo || '').trim(),
-              location_type: 2, // Authorized Dealer / Agent
+              location_type: 2, // Authorised Agent
               working_hours: {
                 Monday: String(r.Monday || '8:30 AM - 6:00 PM'),
                 Tuesday: String(r.Tuesday || '8:30 AM - 6:00 PM'),
@@ -427,7 +427,7 @@
 
         const isBranch = (loc.location_type === 1);
         const colorBg = isBranch ? '#F59E0B' : '#10B981';
-        const badgeText = isBranch ? 'Official Branch' : 'Authorized Dealer';
+        const badgeText = isBranch ? 'Official Branch' : 'Authorised Agent';
         const badgeBg = isBranch ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500 text-white font-black';
 
         const customIcon = L.divIcon({
@@ -576,7 +576,7 @@
         const hasGps = (lat && lon && lat > 5 && lon > 79);
         const isBranch = (loc.location_type === 1);
         const badgeBg = isBranch ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white';
-        const badgeText = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORIZED DEALER';
+        const badgeText = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORISED AGENT';
 
         // Card header thumbnail
         let headerMedia = '';
@@ -597,7 +597,7 @@
                   ${isBranch ? 'LL' : 'AG'}
                 </div>
                 <div>
-                  <span class="text-xs font-bold text-white block">${isBranch ? 'Official Company Yard' : 'Authorized Dealer'}</span>
+                  <span class="text-xs font-bold text-white block">${isBranch ? 'Official Company Branch' : 'Authorised Agent'}</span>
                   <span class="text-[10px] text-slate-400 font-medium">Link Lanka Network</span>
                 </div>
               </div>
@@ -675,7 +675,7 @@
       nameEl.textContent = loc.name || 'LINK LANKA';
       addrEl.textContent = (loc.address || '').replace(/\\n|\n/g, ', ');
 
-      badgeEl.textContent = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORIZED DEALER';
+      badgeEl.textContent = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORISED AGENT';
       badgeEl.className = isBranch 
         ? 'px-2 py-0.5 rounded text-[10px] font-black uppercase bg-amber-400 text-slate-950'
         : 'px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-500 text-white';

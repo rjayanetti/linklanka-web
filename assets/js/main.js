@@ -402,7 +402,7 @@ function initHomeMap() {
         bounds.push([lat, lon]);
         const isBranch = (loc.location_type === 1);
         const colorBg = isBranch ? '#F59E0B' : '#10B981';
-        const badgeText = isBranch ? 'Official Branch' : 'Authorized Dealer';
+        const badgeText = isBranch ? 'Official Branch' : 'Authorised Agent';
         const badgeBg = isBranch ? 'bg-amber-400 text-slate-950 font-black' : 'bg-emerald-500 text-white font-black';
 
         const customIcon = L.divIcon({
