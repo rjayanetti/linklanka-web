@@ -61,7 +61,7 @@
         </a>
 
         <!-- Desktop Menu Links -->
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+        <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold">
           <a href="index.html" class="text-amber-400 hover:text-amber-300 transition-colors">Home</a>
           <a href="locations.html" class="text-slate-300 hover:text-amber-400 transition-colors flex items-center space-x-1">
             <span>Locations</span>
@@ -69,6 +69,10 @@
           </a>
           <a href="products.html" class="text-slate-300 hover:text-amber-400 transition-colors">Products</a>
           <a href="#meter-demo" class="text-slate-300 hover:text-amber-400 transition-colors">Live Meter Demo</a>
+          <a href="fare-calculator.html" class="text-slate-300 hover:text-amber-400 transition-colors flex items-center space-x-1">
+            <span>Fare Calculator</span>
+            <span class="bg-amber-400 text-slate-950 text-[9px] px-1.5 py-0.5 rounded font-black">NEW</span>
+          </a>
           <a href="service-network.html" class="text-slate-300 hover:text-amber-400 transition-colors">Service Yards</a>
           <a href="about.html" class="text-slate-300 hover:text-amber-400 transition-colors">About Us</a>
           <a href="contacts.html" class="text-slate-300 hover:text-amber-400 transition-colors">Contacts</a>
@@ -112,6 +116,10 @@
       </a>
       <a href="products.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Products & Equipment</a>
       <a href="#meter-demo" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Live Meter Simulator</a>
+      <a href="fare-calculator.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold flex items-center justify-between">
+        <span>Three-Wheeler Fare Calculator</span>
+        <span class="bg-amber-400 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded">NEW</span>
+      </a>
       <a href="service-network.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Service Yards (Islandwide)</a>
       <a href="about.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">About Link Lanka</a>
       <a href="contacts.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Contacts & Support</a>
@@ -546,6 +554,103 @@
     </div>
   </div>
 
+  <!-- Three-Wheeler Fare Recommendation Engine Showcase Banner -->
+  <section id="fare-recommender" class="py-20 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#FFCC00_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="bg-gradient-to-r from-slate-900 via-[#121929] to-slate-900 rounded-3xl p-8 sm:p-12 border-2 border-amber-500/30 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center space-x-2 bg-amber-400/20 text-amber-400 border border-amber-400/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+              <span>Official Tuk-Tuk Fare Recommendation Engine</span>
+            </div>
+            
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Transparent Fares for <span class="text-amber-400">Sri Lanka’s Three-Wheelers</span>
+            </h2>
+            
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Wondering what fair Tuk-Tuk charges should be with current fuel prices? Link Lanka has formulated a scientific <strong>9-point operating cost model</strong> factoring in petrol consumption, empty return running (50% wastage), tire wear, routine service, 12-year vehicle depreciation, and fair driver daily wages.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+              <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700 text-center">
+                <span class="block text-slate-400 text-[10px] uppercase font-bold">1st KM Fare</span>
+                <span class="text-2xl font-black text-amber-400 font-mono">Rs. 120</span>
+              </div>
+              <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700 text-center">
+                <span class="block text-slate-400 text-[10px] uppercase font-bold">2nd KM Fare</span>
+                <span class="text-2xl font-black text-emerald-400 font-mono">Rs. 90</span>
+              </div>
+              <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700 text-center">
+                <span class="block text-slate-400 text-[10px] uppercase font-bold">Operating Cost</span>
+                <span class="text-xl font-black text-white font-mono mt-0.5 block">Rs. 66.60</span>
+              </div>
+              <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700 text-center">
+                <span class="block text-slate-400 text-[10px] uppercase font-bold">Duty Cycle</span>
+                <span class="text-sm font-bold text-slate-200 mt-1 block">150 km/day</span>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap gap-4">
+              <a href="fare-calculator.html" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black px-6 py-3.5 rounded-xl text-sm transition-all shadow-lg flex items-center space-x-2 group">
+                <i data-lucide="sliders" class="w-4 h-4"></i>
+                <span>Open Full Interactive Fare Calculator</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+              <a href="service-network.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-5 py-3.5 rounded-xl text-sm border border-slate-700 transition-colors flex items-center space-x-2">
+                <i data-lucide="wrench" class="w-4 h-4 text-amber-400"></i>
+                <span>Calibrate Meter at Service Yard</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-slate-950/80 p-6 rounded-2xl border border-slate-800 space-y-4">
+            <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center space-x-2">
+              <i data-lucide="info" class="w-4 h-4"></i>
+              <span>Key Model Assumptions (150 KM / Day)</span>
+            </h3>
+            
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-start space-x-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Fuel Efficiency:</strong> 20–25 km per Litre on commercial three-wheelers.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Deadheading:</strong> 50 km empty running factored per 100 km passenger hire.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Driver Wage:</strong> Rs. 3,000 baseline fair daily earnings reserve.</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Depreciation:</strong> Rs. 1.8M replacement value over 12 years (540,000 km).</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Routine Maintenance:</strong> Oil, filter, tire sets (35,000 km), and battery reserves.</span>
+              </li>
+            </ul>
+
+            <div class="pt-2">
+              <a href="fare-calculator.html" class="text-xs text-amber-400 hover:text-amber-300 font-bold flex items-center space-x-1 group">
+                <span>View itemized formulas & customize fuel price →</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Featured Products & Solutions Showcase -->
   <section id="products" class="py-24 bg-white text-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -852,6 +957,7 @@
             <li><a href="index.html" class="hover:text-amber-400 transition-colors">Home</a></li>
             <li><a href="locations.html" class="text-amber-400 font-semibold hover:underline">Locations (Branch Network)</a></li>
             <li><a href="products.html" class="hover:text-amber-400 transition-colors">Products & Equipment</a></li>
+            <li><a href="fare-calculator.html" class="hover:text-amber-400 transition-colors">Tuk-Tuk Fare Calculator</a></li>
             <li><a href="service-network.html" class="hover:text-amber-400 transition-colors">Service Yards</a></li>
             <li><a href="about.html" class="hover:text-amber-400 transition-colors">About Us</a></li>
             <li><a href="contacts.html" class="hover:text-amber-400 transition-colors">Contacts</a></li>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three-Wheeler Fare Recommendation Engine | Link Lanka</title>
+  <meta name="description" content="Calculate fair, sustainable Tuk Tuk tariffs in Sri Lanka based on real-time petrol prices, operational overheads, and driver livelihood using Link Lanka's official 9-point scientific cost model.">
+  <link rel="shortcut icon" href="assets/img/LinkLanka.png" type="image/png">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#FFCC00',
+              gold: '#F59E0B',
+              dark: '#0B0F19',
+              darker: '#060910',
+              card: '#131B2E',
+              accent: '#10B981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-black">
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-50 nav-glass text-white transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo & Name -->
+        <a href="index.html" class="flex items-center space-x-3 group">
+          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20">
+            <img src="assets/img/LinkLanka.png" alt="Link Lanka Logo" class="w-full h-full object-contain rounded-[10px] bg-white p-1">
+          </div>
+          <div>
+            <div class="flex items-baseline space-x-1">
+              <span class="text-2xl font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">LINK</span>
+              <span class="text-2xl font-black tracking-tight text-amber-400">LANKA</span>
+            </div>
+            <p class="text-[10px] tracking-widest text-slate-400 uppercase font-bold">The Taxi Meter Company</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu Links -->
+        <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold">
+          <a href="index.html" class="text-slate-300 hover:text-amber-400 transition-colors">Home</a>
+          <a href="locations.html" class="text-slate-300 hover:text-amber-400 transition-colors flex items-center space-x-1">
+            <span>Locations</span>
+            <span class="bg-amber-400/20 text-amber-300 text-[10px] px-1.5 py-0.2 rounded font-bold">Map</span>
+          </a>
+          <a href="products.html" class="text-slate-300 hover:text-amber-400 transition-colors">Products</a>
+          <a href="index.html#meter-demo" class="text-slate-300 hover:text-amber-400 transition-colors">Live Meter Demo</a>
+          <a href="fare-calculator.html" class="text-amber-400 hover:text-amber-300 transition-colors font-bold flex items-center space-x-1">
+            <span>Fare Calculator</span>
+            <span class="bg-amber-400 text-slate-950 text-[9px] px-1.5 py-0.5 rounded font-black">NEW</span>
+          </a>
+          <a href="service-network.html" class="text-slate-300 hover:text-amber-400 transition-colors">Service Yards</a>
+          <a href="about.html" class="text-slate-300 hover:text-amber-400 transition-colors">About Us</a>
+          <a href="contacts.html" class="text-slate-300 hover:text-amber-400 transition-colors">Contacts</a>
+        </nav>
+
+        <!-- Right Quick Contact Hotlines -->
+        <div class="hidden lg:flex items-center space-x-3">
+          <div class="flex flex-col text-right">
+            <span class="text-[10px] text-slate-400 uppercase font-semibold">Direct Call Center</span>
+            <div class="flex items-center space-x-2">
+              <a href="tel:0117177277" class="text-amber-400 hover:text-amber-300 font-black text-sm flex items-center space-x-1">
+                <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                <span>0117177277</span>
+              </a>
+              <span class="text-slate-600">|</span>
+              <a href="tel:0772770277" class="text-emerald-400 hover:text-emerald-300 font-bold text-xs" title="Complaints Line">
+                0772770277
+              </a>
+            </div>
+          </div>
+          <a href="locations.html" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs shadow-md shadow-amber-400/25 transition-all flex items-center space-x-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+            <span>Locations</span>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800/80 focus:outline-none">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3">
+      <a href="index.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Home</a>
+      <a href="locations.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold flex items-center justify-between">
+        <span>Locations (Branch Network Map)</span>
+        <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded">NEW</span>
+      </a>
+      <a href="products.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Products & Equipment</a>
+      <a href="index.html#meter-demo" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Live Meter Simulator</a>
+      <a href="fare-calculator.html" class="block py-2 text-amber-400 font-semibold flex items-center justify-between">
+        <span>Three-Wheeler Fare Calculator</span>
+        <span class="bg-amber-400 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded">NEW</span>
+      </a>
+      <a href="service-network.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Service Yards (Islandwide)</a>
+      <a href="about.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">About Us</a>
+      <a href="contacts.html" class="block py-2 text-slate-200 hover:text-amber-400 font-semibold">Contacts & Yard Direct Lines</a>
+      <div class="pt-2 flex flex-col space-y-2">
+        <a href="tel:0117177277" class="text-center bg-amber-400 text-slate-950 py-2.5 rounded-lg font-bold">
+          📞 Hot-Line: 0117177277
+        </a>
+        <a href="tel:0772770277" class="text-center bg-slate-800 text-emerald-400 py-2.5 rounded-lg font-bold border border-emerald-400/30">
+          ⚠️ Complaints: 0772770277
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header Section -->
+  <section class="bg-slate-900 text-white py-16 relative overflow-hidden border-b border-slate-800">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#FFCC00_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center space-x-2 bg-amber-400/10 border border-amber-400/30 text-amber-400 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+          <span>Official Three-Wheeler Operating Cost Model</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Three-Wheeler <span class="text-amber-400">Fare Recommendation</span> Engine
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base mt-2 font-medium">
+          ත්‍රිරෝද රථ ගාස්තු නිර්දේශක ආකෘතිය • முச்சக்கர வண்டி கட்டண கணிப்பான்
+        </p>
+        <p class="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed">
+          Formulated by Link Lanka to establish fair, scientific, and sustainable tariffs for three-wheelers across Sri Lanka. It balances fair driver earnings against living costs, fuel price fluctuations, vehicle depreciation, and genuine running maintenance.
+        </p>
+
+        <!-- Quick Feature Badges -->
+        <div class="mt-6 flex flex-wrap gap-2 text-xs">
+          <span class="inline-flex items-center space-x-1.5 bg-slate-800/90 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>150 KM / Day Duty Cycle</span>
+          </span>
+          <span class="inline-flex items-center space-x-1.5 bg-slate-800/90 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>50% Empty Running (Wastage) Factor</span>
+          </span>
+          <span class="inline-flex items-center space-x-1.5 bg-slate-800/90 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Scientific 9-Point Itemization</span>
+          </span>
+          <span class="inline-flex items-center space-x-1.5 bg-slate-800/90 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-lg">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Digitally Protected Tariff Config</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Calculator Main Section -->
+  <section class="py-12 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Column: Controls & Result Cards (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Input Controls Card -->
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold text-slate-900 mb-1 flex items-center space-x-2">
+              <i data-lucide="sliders" class="w-5 h-5 text-amber-500"></i>
+              <span>Variable Inputs</span>
+            </h2>
+            <p class="text-xs text-slate-500 mb-6">Adjust current fuel price and target driver profit margin:</p>
+
+            <div class="space-y-6">
+              
+              <!-- Input 1: Petrol Cost -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label for="petrolCost" class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Petrol Price (LKR / Litre)
+                  </label>
+                  <span class="text-xs font-mono font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                    Rs. / L
+                  </span>
+                </div>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 font-bold text-sm">Rs.</span>
+                  <input type="number" id="petrolCost" value="398" min="200" max="600" step="1" 
+                    class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl font-mono text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all">
+                </div>
+                <!-- Slider -->
+                <input type="range" id="petrolSlider" min="250" max="550" value="398" step="1"
+                  class="w-full mt-2.5 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                
+                <!-- Quick Presets -->
+                <div class="flex items-center space-x-2 mt-2">
+                  <span class="text-[10px] text-slate-400 font-semibold uppercase">Presets:</span>
+                  <button type="button" data-set-petrol="368" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    Rs. 368
+                  </button>
+                  <button type="button" data-set-petrol="398" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-amber-400 bg-amber-400 text-slate-950 transition-colors">
+                    Rs. 398
+                  </button>
+                  <button type="button" data-set-petrol="420" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    Rs. 420
+                  </button>
+                  <button type="button" data-set-petrol="450" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    Rs. 450
+                  </button>
+                </div>
+              </div>
+
+              <!-- Input 2: Driver Profit -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label for="profit" class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Target Driver Profit (%)
+                  </label>
+                  <span class="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    Net Margin %
+                  </span>
+                </div>
+                <div class="relative">
+                  <input type="number" id="profit" value="40" min="10" max="80" step="1" 
+                    class="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-300 rounded-xl font-mono text-base font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all">
+                  <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 font-bold text-sm">%</span>
+                </div>
+                <!-- Slider -->
+                <input type="range" id="profitSlider" min="15" max="70" value="40" step="1"
+                  class="w-full mt-2.5 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                
+                <!-- Quick Presets -->
+                <div class="flex items-center space-x-2 mt-2">
+                  <span class="text-[10px] text-slate-400 font-semibold uppercase">Presets:</span>
+                  <button type="button" data-set-profit="30" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    30%
+                  </button>
+                  <button type="button" data-set-profit="35" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    35%
+                  </button>
+                  <button type="button" data-set-profit="40" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-amber-400 bg-amber-400 text-slate-950 transition-colors">
+                    40% (Std)
+                  </button>
+                  <button type="button" data-set-profit="50" class="text-[11px] font-bold px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-100 text-slate-700 hover:border-amber-400 hover:bg-amber-50 transition-colors">
+                    50%
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Highlight Recommendation Display Card -->
+          <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-[#141A29] rounded-3xl p-6 text-white shadow-xl border border-slate-800 relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs uppercase font-extrabold tracking-wider text-amber-400">Recommended Fare Structure</span>
+              </div>
+              <span class="text-[10px] text-slate-400 font-semibold bg-slate-800 px-2 py-0.5 rounded">Rounded to Nearest Rs. 5</span>
+            </div>
+
+            <!-- Big Two Numbers -->
+            <div class="grid grid-cols-2 gap-4 my-6">
+              
+              <!-- First KM Charge -->
+              <div class="bg-slate-800/80 border border-amber-500/30 rounded-2xl p-4 text-center relative group hover:border-amber-400 transition-colors">
+                <div class="text-[11px] uppercase font-bold text-slate-300 mb-1">
+                  1<sup class="lowercase">st</sup> KM Charge (Base)
+                </div>
+                <div id="firstKm" class="text-4xl sm:text-5xl font-black text-amber-400 font-mono tracking-tight">
+                  Rs. 120
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1">First Kilometer Flag Drop</div>
+              </div>
+
+              <!-- Second KM Charge -->
+              <div class="bg-slate-800/80 border border-emerald-500/30 rounded-2xl p-4 text-center relative group hover:border-emerald-400 transition-colors">
+                <div class="text-[11px] uppercase font-bold text-slate-300 mb-1">
+                  Subsequent KM (2<sup class="lowercase">nd</sup> KM+)
+                </div>
+                <div id="secondKm" class="text-4xl sm:text-5xl font-black text-emerald-400 font-mono tracking-tight">
+                  Rs. 90
+                </div>
+                <div class="text-[10px] text-slate-400 mt-1">Per Additional Kilometer</div>
+              </div>
+
+            </div>
+
+            <!-- Key Metric Rows -->
+            <div class="space-y-2.5 pt-4 border-t border-slate-800 text-xs text-slate-300">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Total Operating Cost / KM:</span>
+                <span id="totalCost" class="font-mono font-bold text-white text-sm">Rs. 66.60</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Direct Fuel Overhead / KM:</span>
+                <span id="fuelTotalCost" class="font-mono font-bold text-amber-300">Rs. 29.85</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Driver Profit Margin / KM:</span>
+                <span id="profitAmount" class="font-mono font-bold text-emerald-400">Rs. 23.40</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-2">
+              <a href="service-network.html" class="flex-1 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 px-3 rounded-xl text-xs text-center transition-all flex items-center justify-center space-x-1.5 shadow-md">
+                <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
+                <span>Calibrate Meter to This Rate</span>
+              </a>
+              <button onclick="window.print()" type="button" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 px-3 rounded-xl text-xs transition-colors flex items-center justify-center space-x-1.5">
+                <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                <span>Print Sheet</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Quick Notice Box -->
+          <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex items-start space-x-3">
+            <i data-lucide="shield-check" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+            <div>
+              <span class="font-bold block">Digitally Secured Rate Change Protocol:</span>
+              <span>All Link Lanka taxi fare meters support instant, cryptographically secured rate updates at any of our 9 company service yards or 40+ branch locations nationwide.</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: 9-Point Itemized Operating Cost Breakdown Table (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-2 mb-4">
+              <div>
+                <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
+                  <i data-lucide="file-spreadsheet" class="w-5 h-5 text-amber-500"></i>
+                  <span>Itemized Cost Per Kilometer Breakdown</span>
+                </h2>
+                <p class="text-xs text-slate-500">Based on 150 km daily run (100 km hire + 50 km empty return / wastage)</p>
+              </div>
+              <span class="self-start sm:self-auto text-[11px] font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full">
+                9 Cost Categories
+              </span>
+            </div>
+
+            <!-- Visual Cost Distribution Bar -->
+            <div class="mb-5">
+              <div class="flex justify-between items-center text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                <span>Cost Component Share</span>
+                <span>100% Total Operating Cost</span>
+              </div>
+              <div class="w-full h-4 bg-slate-100 rounded-full overflow-hidden flex text-[9px] font-bold text-white text-center leading-4">
+                <div id="barFuel" class="bg-amber-500 transition-all duration-300" style="width: 45%;">Fuel 45%</div>
+                <div id="barWage" class="bg-emerald-600 transition-all duration-300" style="width: 30%;">Wage 30%</div>
+                <div id="barMaint" class="bg-blue-600 transition-all duration-300" style="width: 13%;">Maint 13%</div>
+                <div id="barCapital" class="bg-purple-600 transition-all duration-300" style="width: 12%;">Cap 12%</div>
+              </div>
+              <div class="flex flex-wrap gap-3 mt-2 text-[10px] text-slate-500 font-medium">
+                <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span><span>Fuel (Actual & Empty)</span></span>
+                <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-emerald-600"></span><span>Driver Daily Wage</span></span>
+                <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-blue-600"></span><span>Service, Tires & Repairs</span></span>
+                <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-purple-600"></span><span>Depreciation & Financing</span></span>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider font-semibold">
+                    <th class="py-3 px-3 sm:px-4">Cost Category</th>
+                    <th class="py-3 px-3 sm:px-4 text-right">Cost Per KM</th>
+                    <th class="py-3 px-3 sm:px-4 text-center hidden sm:table-cell">Share</th>
+                    <th class="py-3 px-3 sm:px-4 text-center">Formula</th>
+                  </tr>
+                </thead>
+                <tbody id="resultTable" class="divide-y divide-slate-100">
+                  <!-- Generated by JavaScript calculate() -->
+                </tbody>
+                <tfoot>
+                  <tr class="bg-slate-100/90 text-slate-900 font-black text-xs sm:text-sm border-t-2 border-slate-300">
+                    <td class="py-3.5 px-3 sm:px-4">
+                      <span>TOTAL COST PER KM (රු./කි.මී.)</span>
+                      <span class="block text-[10px] text-slate-500 font-normal">Excluding Driver Profit Margin</span>
+                    </td>
+                    <td id="totalCost" class="py-3.5 px-3 sm:px-4 text-right font-mono text-base text-slate-950">
+                      Rs. 66.60
+                    </td>
+                    <td class="py-3.5 px-3 sm:px-4 text-center hidden sm:table-cell">
+                      <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-slate-300 text-slate-800">100%</span>
+                    </td>
+                    <td class="py-3.5 px-3 sm:px-4 text-center text-xs text-slate-400">-</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- Instructions -->
+            <p class="text-[11px] text-slate-400 mt-3 flex items-center space-x-1.5">
+              <i data-lucide="info" class="w-4 h-4 text-amber-500 shrink-0"></i>
+              <span>Click the <strong class="text-amber-700">"Info"</strong> button next to any line item above to view its underlying formula, distance assumptions, and engineering methodology.</span>
+            </p>
+
+          </div>
+
+          <!-- Explanatory Accordion / Methodology Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center space-x-2 text-amber-600 font-bold text-xs">
+                <i data-lucide="fuel" class="w-4 h-4"></i>
+                <span>Why 50% Empty Running Wastage?</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                In commercial three-wheeler operations, a driver rarely receives a return hire immediately. On average, traveling 100 km with passengers requires 50 km of empty running (deadheading, waiting at ranks, returning to stands).
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center space-x-2 text-emerald-600 font-bold text-xs">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                <span>Driver Wage & Fair Livelihood</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A daily baseline wage of Rs. 3,000 is amortized over the 150 km daily cycle (Rs. 20.00/km). The separate profit margin covers risk, unexpected repairs, inflation, and seasonal fluctuations.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center space-x-2 text-blue-600 font-bold text-xs">
+                <i data-lucide="wrench" class="w-4 h-4"></i>
+                <span>Maintenance & Tire Provisions</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Every 3,000 km requires oil changes, filter cleaning, body washes, and cable lubrication. Three tires (35,000 km life @ Rs. 5,500 each) and regular battery replacement reserves are factored in.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center space-x-2 text-purple-600 font-bold text-xs">
+                <i data-lucide="trending-down" class="w-4 h-4"></i>
+                <span>12-Year Capital & Depreciation</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A new Tuk-Tuk replacement cost (Rs. 1.8M) depreciates over a 12-year lifespan (540,000 km total). Capital interest is accounted for at 10% annual rate (Rs. 180,000/yr), equating to Rs. 4.00/km.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Banner to Calibrate Meter -->
+  <section class="py-16 bg-slate-900 text-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center space-x-2 bg-amber-400/20 text-amber-400 px-3 py-1 rounded-full text-xs font-bold uppercase mb-4">
+        Nationwide Service Network
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight max-w-2xl mx-auto">
+        Ready to Program These Rates Into Your Meter?
+      </h2>
+      <p class="text-slate-400 text-sm max-w-xl mx-auto mt-3">
+        Visit any of our 9 Link Lanka Service Yards or 40+ Authorized Branch Locations island-wide for fast, certified digital rate configuration.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="service-network.html" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black px-6 py-3.5 rounded-xl text-sm transition-all shadow-lg flex items-center space-x-2">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
+          <span>Find Nearest Service Yard</span>
+        </a>
+        <a href="tel:0117177277" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl text-sm border border-slate-700 transition-colors flex items-center space-x-2">
+          <i data-lucide="phone" class="w-4 h-4 text-amber-400"></i>
+          <span>Call Hotline: 0117177277</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Info Modal -->
+  <div id="fareInfoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+      
+      <button onclick="closeFareModal()" type="button" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+          <i data-lucide="help-circle" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 id="fareModalTitle" class="text-lg font-bold text-slate-900 leading-snug">Cost Component</h3>
+          <span id="fareModalMeta" class="text-xs text-slate-500 font-medium">Calculation Details</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-6">
+        <div id="fareModalText" class="text-xs sm:text-sm text-slate-700 whitespace-pre-line leading-relaxed font-sans">
+          <!-- Text inserted by showFareModal -->
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="closeFareModal()" type="button" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-colors">
+          Got It / හරි
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 text-sm py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <span class="text-xl font-black text-white">LINK <span class="text-amber-400">LANKA</span></span>
+        <span class="text-xs text-slate-500">| Quality Taxi Electronics Since 2008</span>
+      </div>
+      <div class="text-xs text-slate-500">
+        Hotline: <a href="tel:0117177277" class="text-amber-400 font-bold">0117177277</a> • Kirulapone Avenue, Colombo 06
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

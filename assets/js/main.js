@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- INTERACTIVE HOME BRANCH MAP ---
   initHomeMap();
+
+  // --- THREE-WHEELER FARE RECOMMENDATOR ---
+  initFareCalculator();
 });
 
 // Interactive Digital Taxi Meter Simulator
@@ -382,3 +385,271 @@ function initHomeMap() {
     })
     .catch(err => console.error('Error loading home map locations:', err));
 }
+
+// --- THREE-WHEELER FARE RECOMMENDATION ENGINE ---
+function initFareCalculator() {
+  const petrolInput = document.getElementById('petrolCost');
+  const profitInput = document.getElementById('profit');
+  const petrolSlider = document.getElementById('petrolSlider');
+  const profitSlider = document.getElementById('profitSlider');
+  const resultTable = document.getElementById('resultTable');
+  const totalCostDisplay = document.getElementById('totalCost');
+  const firstKmDisplay = document.getElementById('firstKm');
+  const secondKmDisplay = document.getElementById('secondKm');
+
+  if (!petrolInput || !resultTable) return;
+
+  function formatCurrency(val) {
+    return val.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function roundTo5(val) {
+    return Math.floor(val / 5) * 5;
+  }
+
+  const costDefinitions = [
+    {
+      id: 'petrol_actual',
+      name: 'Petrol (Actual Hire)',
+      sinhala: 'සැබෑ ධාවන ඉන්ධන පිරිවැය',
+      category: 'Fuel',
+      calc: (p) => p / 20,
+      desc: 'Approx. fuel consumption is 20–25 km per Litre.\nCalculation: Fuel Price (Rs/L) ÷ 20 km = Direct Fuel Cost per KM during passenger hire.'
+    },
+    {
+      id: 'petrol_wastage',
+      name: 'Petrol (Wastage / Empty Running 50%)',
+      sinhala: 'හිස් ධාවනය (50% නාස්තිය)',
+      category: 'Fuel',
+      calc: (p) => (p / 20) * 0.5,
+      desc: 'Calculated per km cost considering 100 km passenger hire & 50 km empty running/deadheading per day.\nThis is 50% of Petrol (Actual Hire).'
+    },
+    {
+      id: 'service',
+      name: 'Service & Lubricants',
+      sinhala: 'නඩත්තු සහ ලිහිසි තෙල්',
+      category: 'Maintenance',
+      calc: () => 15000 / 3750,
+      desc: 'Body Wash / Under Wash / Oil Change / Filters / Gear Cable Replacement / Lubrication: Rs. 15,000.\nRequired every 3,000 km (3,750 km monthly distance): Rs. 15,000 ÷ 3,750 km = Rs. 4.00/km.'
+    },
+    {
+      id: 'tire',
+      name: 'Tire / Tube Wear',
+      sinhala: 'ටයර් සහ ටියුබ් ගෙවීම',
+      category: 'Maintenance',
+      calc: () => 16500 / 35000,
+      desc: 'Complete 3-Tire replacement set: Rs. 5,500 × 3 = Rs. 16,500.\nExpected lifespan: Approx. 35,000 km per tire set.\nCalculation: Rs. 16,500 ÷ 35,000 km = Rs. 0.47/km.'
+    },
+    {
+      id: 'fees',
+      name: 'Annual Fees / Insurance',
+      sinhala: 'වාර්ෂික බලපත්‍ර සහ රක්ෂණය',
+      category: 'Regulatory',
+      calc: () => 0.75,
+      desc: 'Annual Commercial Insurance: Rs. 25,000\nRevenue License: Rs. 1,000\nEmission Test: Rs. 1,000\nTotal Annual Overheads: Rs. 27,000 ÷ 36,000 operational km = Rs. 0.75/km.'
+    },
+    {
+      id: 'salary',
+      name: 'Driver Wage / Earnings',
+      sinhala: 'රියදුරු දෛනික වැටුප',
+      category: 'Livelihood',
+      calc: () => 3000 / 150,
+      desc: 'Baseline fair living wage: Rs. 3,000 per day.\nCalculated over standard daily distance of 150 km: Rs. 3,000 ÷ 150 km = Rs. 20.00/km.'
+    },
+    {
+      id: 'depreciation',
+      name: 'Vehicle Depreciation',
+      sinhala: 'වාහන ක්ෂයවීම',
+      category: 'Capital',
+      calc: () => 1800000 / 540000,
+      desc: 'Three-Wheeler Replacement Cost: LKR 1.5 to 1.8 Million.\nVehicle Lifetime: 12 Years.\nDaily Distance: 150 km (Hire: 100 km / Empty: 50 km).\nMonthly Distance: 150 km × 25 working days = 3,750 km.\nAnnual Distance: 3,750 km × 12 = 45,000 km.\nLifetime Distance: 45,000 km × 12 years = 540,000 km.\nDepreciation Per km: Rs. 1,800,000 ÷ 540,000 km = Rs. 3.33/km.'
+    },
+    {
+      id: 'interest',
+      name: 'Interest on Capital',
+      sinhala: 'ප්‍රාග්ධන පොලිය',
+      category: 'Capital',
+      calc: () => 180000 / 45000,
+      desc: 'Approx. Annual Financing / Opportunity Interest: 10% on Rs. 1,800,000 = Rs. 180,000/year.\nInterest on Capital Per km: Rs. 180,000 ÷ 45,000 annual km = Rs. 4.00/km.'
+    },
+    {
+      id: 'repairs',
+      name: 'Running Repairs & Battery',
+      sinhala: 'ධාවන අලුත්වැඩියා සහ බැටරි',
+      category: 'Maintenance',
+      calc: () => 15750 / 3750,
+      desc: 'LKR 15,000 for regular running repairs + Battery replacement every 18 months.\nTotal monthly maintenance reserve: Rs. 15,750.\nRunning Cost Per km: Rs. 15,750 ÷ 3,750 km = Rs. 4.20/km.'
+    }
+  ];
+
+  window.currentFareRows = [];
+
+  function calculate() {
+    const petrol = parseFloat(petrolInput.value) || 0;
+    const profit = parseFloat(profitInput.value) || 0;
+
+    // Sync sliders
+    if (petrolSlider && parseFloat(petrolSlider.value) !== petrol) {
+      petrolSlider.value = petrol;
+    }
+    if (profitSlider && parseFloat(profitSlider.value) !== profit) {
+      profitSlider.value = profit;
+    }
+
+    const rows = costDefinitions.map(def => ({
+      ...def,
+      value: def.calc(petrol)
+    }));
+    window.currentFareRows = rows;
+
+    let total = 0;
+    rows.forEach(r => total += r.value);
+
+    // PROFIT BASED CALCULATION (Exact formula from formulla.js)
+    const secondKm = roundTo5(total + (total * (profit / 100)));
+    const firstKm = secondKm + 30;
+    const profitAmount = (secondKm > total) ? (secondKm - total) : 0;
+
+    // Render Table
+    resultTable.innerHTML = '';
+    rows.forEach((r, idx) => {
+      const pct = total > 0 ? ((r.value / total) * 100).toFixed(1) : '0';
+      const tr = document.createElement('tr');
+      tr.className = 'border-b border-slate-100 hover:bg-amber-50/50 transition-colors text-xs sm:text-sm';
+      tr.innerHTML = `
+        <td class="py-3 px-3 sm:px-4">
+          <div class="font-bold text-slate-800">${r.name}</div>
+          <div class="text-[10px] text-slate-400 font-medium">${r.sinhala} • <span class="text-amber-600 font-semibold">${r.category}</span></div>
+        </td>
+        <td class="py-3 px-3 sm:px-4 text-right font-mono font-bold text-slate-900">
+          Rs. ${formatCurrency(r.value)}
+        </td>
+        <td class="py-3 px-3 sm:px-4 text-center hidden sm:table-cell">
+          <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">
+            ${pct}%
+          </span>
+        </td>
+        <td class="py-3 px-3 sm:px-4 text-center">
+          <button type="button" onclick="showFareModal(${idx})" class="p-1 sm:px-2.5 sm:py-1 rounded-lg text-amber-600 hover:text-amber-900 hover:bg-amber-100/70 text-xs font-bold transition-all inline-flex items-center space-x-1" title="View formula details">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="hidden sm:inline">Info</span>
+          </button>
+        </td>
+      `;
+      resultTable.appendChild(tr);
+    });
+
+    if (totalCostDisplay) totalCostDisplay.innerText = 'Rs. ' + formatCurrency(total);
+    if (secondKmDisplay) secondKmDisplay.innerText = 'Rs. ' + secondKm;
+    if (firstKmDisplay) firstKmDisplay.innerText = 'Rs. ' + firstKm;
+
+    const profitDisplay = document.getElementById('profitAmount');
+    if (profitDisplay) profitDisplay.innerText = 'Rs. ' + formatCurrency(profitAmount);
+
+    const fuelTotal = (rows[0].value + rows[1].value);
+    const fuelDisplay = document.getElementById('fuelTotalCost');
+    if (fuelDisplay) fuelDisplay.innerText = 'Rs. ' + formatCurrency(fuelTotal);
+
+    // Visual percentage distribution bars
+    if (total > 0) {
+      const fuelPct = ((fuelTotal / total) * 100).toFixed(0);
+      const wagePct = ((rows[5].value / total) * 100).toFixed(0);
+      const maintPct = (((rows[2].value + rows[3].value + rows[8].value) / total) * 100).toFixed(0);
+      const capPct = (((rows[4].value + rows[6].value + rows[7].value) / total) * 100).toFixed(0);
+
+      const fuelBar = document.getElementById('barFuel');
+      const wageBar = document.getElementById('barWage');
+      const maintBar = document.getElementById('barMaint');
+      const capBar = document.getElementById('barCapital');
+
+      if (fuelBar) { fuelBar.style.width = fuelPct + '%'; fuelBar.textContent = 'Fuel ' + fuelPct + '%'; }
+      if (wageBar) { wageBar.style.width = wagePct + '%'; wageBar.textContent = 'Wage ' + wagePct + '%'; }
+      if (maintBar) { maintBar.style.width = maintPct + '%'; maintBar.textContent = 'Maint ' + maintPct + '%'; }
+      if (capBar) { capBar.style.width = capPct + '%'; capBar.textContent = 'Cap ' + capPct + '%'; }
+    }
+  }
+
+  // Event Listeners
+  petrolInput.addEventListener('input', calculate);
+  profitInput.addEventListener('input', calculate);
+
+  if (petrolSlider) {
+    petrolSlider.addEventListener('input', (e) => {
+      petrolInput.value = e.target.value;
+      calculate();
+    });
+  }
+
+  if (profitSlider) {
+    profitSlider.addEventListener('input', (e) => {
+      profitInput.value = e.target.value;
+      calculate();
+    });
+  }
+
+  // Preset buttons
+  document.querySelectorAll('[data-set-petrol]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      petrolInput.value = btn.getAttribute('data-set-petrol');
+      calculate();
+      updatePresetPillStyle('[data-set-petrol]', btn);
+    });
+  });
+
+  document.querySelectorAll('[data-set-profit]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      profitInput.value = btn.getAttribute('data-set-profit');
+      calculate();
+      updatePresetPillStyle('[data-set-profit]', btn);
+    });
+  });
+
+  function updatePresetPillStyle(selector, activeBtn) {
+    document.querySelectorAll(selector).forEach(b => {
+      b.classList.remove('bg-amber-400', 'text-slate-950', 'border-amber-400');
+      b.classList.add('bg-slate-100', 'text-slate-700', 'border-slate-200');
+    });
+    activeBtn.classList.remove('bg-slate-100', 'text-slate-700', 'border-slate-200');
+    activeBtn.classList.add('bg-amber-400', 'text-slate-950', 'border-amber-400');
+  }
+
+  // Initial Calculation
+  calculate();
+}
+
+// Global modal helpers for fare details
+window.showFareModal = function(index) {
+  const modal = document.getElementById('fareInfoModal');
+  const modalTitle = document.getElementById('fareModalTitle');
+  const modalText = document.getElementById('fareModalText');
+  const modalMeta = document.getElementById('fareModalMeta');
+  
+  if (!modal || !window.currentFareRows || !window.currentFareRows[index]) return;
+  const row = window.currentFareRows[index];
+
+  if (modalTitle) modalTitle.innerText = row.name;
+  if (modalMeta) modalMeta.innerText = 'Category: ' + row.category + ' • Cost: Rs. ' + (row.value ? row.value.toFixed(2) : '0.00') + ' / km';
+  if (modalText) modalText.innerText = row.desc;
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+};
+
+window.closeFareModal = function() {
+  const modal = document.getElementById('fareInfoModal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+};
+
+// Backward-compatibility alias for formulla.js showDetails
+window.showDetails = function(index) {
+  window.showFareModal(index);
+};
+
