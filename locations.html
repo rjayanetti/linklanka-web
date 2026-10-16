@@ -31,6 +31,10 @@
   <!-- Leaflet CSS & JS for Interactive Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- SheetJS for dynamic in-browser Excel parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-black">
@@ -183,20 +187,106 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-10">
-        <h3 class="text-2xl font-black text-slate-900">Branch Directory & Contact Numbers</h3>
-        <p class="text-slate-600 text-xs mt-1">Direct contact numbers for all Link Lanka branches across the island.</p>
+        <div class="inline-flex items-center space-x-2 bg-amber-200/60 border border-amber-300 text-amber-900 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-700"></i>
+          <span>Live Location Directory</span>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-900">Branch & Agent Directory</h3>
+        <p class="text-slate-600 text-xs mt-1">Direct contact numbers and operating schedules for all Link Lanka branches and authorized dealers island-wide.</p>
         
-        <div class="mt-4">
-          <input id="branchSearch" type="text" placeholder="Type town or street name (e.g. Kirulapone, Kadawatha, Kandy, Moratuwa)..." class="w-full max-w-md px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm">
+        <!-- Live Search Bar -->
+        <div class="mt-5 max-w-md mx-auto">
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input id="branchSearch" type="text" placeholder="Search by town, name, or phone number..." class="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm transition-all">
+          </div>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-5">
+          <button id="filterAllBtn" onclick="setCategoryFilter('all')" class="category-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 shadow transition-all flex items-center space-x-1.5">
+            <span>All Locations</span>
+            <span id="countAll" class="bg-slate-950/20 text-slate-950 text-[10px] px-1.5 py-0.2 rounded font-black">42</span>
+          </button>
+          <button id="filterBranchBtn" onclick="setCategoryFilter('branch')" class="category-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition-all flex items-center space-x-1.5">
+            <span>Official Branches</span>
+            <span id="countBranch" class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.2 rounded font-bold">11</span>
+          </button>
+          <button id="filterAgentBtn" onclick="setCategoryFilter('agent')" class="category-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition-all flex items-center space-x-1.5">
+            <span>Authorized Dealers</span>
+            <span id="countAgent" class="bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.2 rounded font-bold">31</span>
+          </button>
         </div>
       </div>
 
-      <div id="branchListGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Rendered by JS from live locations.json -->
+      <!-- Directory Cards Grid -->
+      <div id="branchListGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically rendered from locations.xlsx -->
+      </div>
+
+      <!-- Empty State Message -->
+      <div id="emptySearchState" class="hidden text-center py-16">
+        <div class="w-16 h-16 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="map-pin-off" class="w-8 h-8"></i>
+        </div>
+        <h4 class="text-base font-bold text-slate-800">No matching locations found</h4>
+        <p class="text-xs text-slate-500 mt-1">Try searching for a different town, street, or clear your search query.</p>
       </div>
 
     </div>
   </section>
+
+  <!-- Working Hours Pop-up Modal -->
+  <div id="workingHoursModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+      
+      <button onclick="closeWorkingHoursModal()" type="button" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-start space-x-3.5 mb-5 pr-8">
+        <div id="modalLocIcon" class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+          <i data-lucide="clock" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2 mb-1">
+            <span id="modalLocTypeBadge" class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-amber-400 text-slate-950">BRANCH</span>
+            <span id="modalLiveStatusBadge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">● Open Today</span>
+          </div>
+          <h3 id="modalLocName" class="text-lg font-black text-slate-900 leading-snug">Kirulapone Head Office</h3>
+          <p id="modalLocAddress" class="text-xs text-slate-500 mt-0.5 leading-tight">No. 38, Kirulapone Avenue, Colombo 05</p>
+        </div>
+      </div>
+
+      <!-- 7-Day Timetable Table (Monday to Sunday) -->
+      <div class="rounded-2xl border border-slate-200 overflow-hidden mb-5">
+        <table class="w-full text-xs">
+          <thead>
+            <tr class="bg-slate-100/90 text-slate-700 font-bold uppercase tracking-wider text-[10px] border-b border-slate-200">
+              <th class="py-2.5 px-4 text-left">Day of the Week</th>
+              <th class="py-2.5 px-4 text-right">Operating Hours</th>
+            </tr>
+          </thead>
+          <tbody id="modalHoursTableBody" class="divide-y divide-slate-100">
+            <!-- Rendered by openWorkingHoursModal(idx) -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-col sm:flex-row gap-2 pt-2 border-t border-slate-100">
+        <a id="modalCallBtn" href="tel:" class="flex-1 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs text-center flex items-center justify-center space-x-1.5 transition-colors shadow">
+          <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+          <span>Call Location</span>
+        </a>
+        <a id="modalDirectionsBtn" href="#" target="_blank" rel="noopener" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs text-center flex items-center justify-center space-x-1.5 transition-colors">
+          <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+          <span>Directions</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Global Footer -->
   <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 text-sm py-12">
@@ -217,24 +307,116 @@
   <script>
     lucide.createIcons();
 
+    let allLocations = [];
+    let currentCategory = 'all';
     let map = null;
     const markersMap = {};
     let allBounds = [];
 
+    // Helper: Normalize Phone Number
+    function cleanPhone(val) {
+      if (val === undefined || val === null) return '';
+      let s = String(val).trim();
+      if (s.endsWith('.0')) s = s.slice(0, -2);
+      if (/^\d{9}$/.test(s)) s = '0' + s;
+      return s;
+    }
+
+    // Dynamic In-Browser Excel Loader using SheetJS
+    async function loadLocationsData() {
+      try {
+        if (typeof XLSX === 'undefined') throw new Error('SheetJS not loaded');
+        const res = await fetch('assets/data/locations.xlsx');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const buffer = await res.arrayBuffer();
+        const wb = XLSX.read(buffer, { type: 'array' });
+        
+        const list = [];
+
+        // 1. Process Official Branches (Sheet: Branch List)
+        const branchSheetName = wb.SheetNames.find(n => n.toLowerCase().includes('branch')) || wb.SheetNames[1];
+        if (branchSheetName && wb.Sheets[branchSheetName]) {
+          const rows = XLSX.utils.sheet_to_json(wb.Sheets[branchSheetName], { defval: '' });
+          rows.forEach(r => {
+            const name = (r.Description || r.AgentName || r.Name || '').trim();
+            if (!name) return;
+            list.push({
+              name: name,
+              address: String(r.Address || '').trim(),
+              phone_no1: cleanPhone(r.Telephone1),
+              phone_no2: cleanPhone(r.Telephone2),
+              lon: parseFloat(r.Longitude) || 0,
+              lat: parseFloat(r.Latitude) || 0,
+              photo: String(r.Photo || '').trim(),
+              location_type: 1, // Official Branch
+              working_hours: {
+                Monday: String(r.Monday || '8:00 AM - 6:00 PM'),
+                Tuesday: String(r.Tuesday || '8:00 AM - 6:00 PM'),
+                Wednesday: String(r.Wednesday || '8:00 AM - 6:00 PM'),
+                Thursday: String(r.Thursday || '8:00 AM - 6:00 PM'),
+                Friday: String(r.Friday || '8:00 AM - 6:00 PM'),
+                Saturday: String(r.Saturday || '8:00 AM - 5:00 PM'),
+                Sunday: String(r.Sunday || 'Closed')
+              }
+            });
+          });
+        }
+
+        // 2. Process Authorized Dealers (Sheet: Agent List)
+        const agentSheetName = wb.SheetNames.find(n => n.toLowerCase().includes('agent')) || wb.SheetNames[0];
+        if (agentSheetName && wb.Sheets[agentSheetName]) {
+          const rows = XLSX.utils.sheet_to_json(wb.Sheets[agentSheetName], { defval: '' });
+          rows.forEach(r => {
+            const name = (r.AgentName || r.Description || r.Name || '').trim();
+            if (!name) return;
+            list.push({
+              name: name,
+              address: String(r.Address || '').trim(),
+              phone_no1: cleanPhone(r.Telephone1),
+              phone_no2: cleanPhone(r.Telephone2),
+              lon: parseFloat(r.Longitude) || 0,
+              lat: parseFloat(r.Latitude) || 0,
+              photo: String(r.Photo || '').trim(),
+              location_type: 2, // Authorized Dealer / Agent
+              working_hours: {
+                Monday: String(r.Monday || '8:30 AM - 6:00 PM'),
+                Tuesday: String(r.Tuesday || '8:30 AM - 6:00 PM'),
+                Wednesday: String(r.Wednesday || '8:30 AM - 6:00 PM'),
+                Thursday: String(r.Thursday || '8:30 AM - 6:00 PM'),
+                Friday: String(r.Friday || '8:30 AM - 6:00 PM'),
+                Saturday: String(r.Saturday || '8:30 AM - 5:00 PM'),
+                Sunday: String(r.Sunday || 'Closed')
+              }
+            });
+          });
+        }
+
+        if (list.length > 0) return list;
+        throw new Error('No entries found in Excel sheets');
+      } catch (err) {
+        console.warn('Falling back to locations.json:', err);
+        const r = await fetch('assets/data/locations.json');
+        return await r.json();
+      }
+    }
+
+    // Initialize Interactive Leaflet Map
     function initBranchMap(locations) {
       const mapEl = document.getElementById('branchMap');
       if (!mapEl || typeof L === 'undefined') return;
 
-      map = L.map('branchMap', {
-        center: [7.8731, 80.7718],
-        zoom: 8,
-        scrollWheelZoom: false
-      });
+      if (!map) {
+        map = L.map('branchMap', {
+          center: [7.8731, 80.7718],
+          zoom: 8,
+          scrollWheelZoom: false
+        });
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
-      }).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+        }).addTo(map);
+      }
 
       allBounds = [];
 
@@ -266,27 +448,26 @@
 
         const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
         const p1 = (loc.phone_no1 || '').trim();
-        const p2 = (loc.phone_no2 || '').trim();
+        const photoHtml = loc.photo 
+          ? `<div class="h-24 w-full rounded-lg overflow-hidden mb-2 bg-slate-900"><img src="assets/img/branches/${loc.photo}" onerror="this.onerror=null; this.src='assets/img/${loc.photo}';" alt="${loc.name}" class="w-full h-full object-cover"></div>` 
+          : '';
 
         const popupHtml = `
-          <div class="text-left font-sans text-xs">
-            <div class="flex items-center space-x-1.5 mb-1.5">
+          <div class="text-left font-sans text-xs max-w-[240px]">
+            ${photoHtml}
+            <div class="flex items-center space-x-1.5 mb-1">
               <span class="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider ${badgeBg}">
                 ${badgeText}
               </span>
             </div>
-            <h4 class="font-extrabold text-sm text-white mb-1">${loc.name || 'LINK LANKA'}</h4>
-            <p class="text-slate-300 leading-snug mb-3">${cleanAddr}</p>
+            <h4 class="font-extrabold text-sm text-white mb-0.5">${loc.name || 'LINK LANKA'}</h4>
+            <p class="text-slate-300 leading-snug mb-2 text-[11px]">${cleanAddr}</p>
             <div class="pt-2 border-t border-slate-700/80 flex flex-wrap gap-1.5">
-              ${p1 ? `<a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1 shadow">
-                <span>📞 ${p1}</span>
-              </a>` : ''}
-              ${p2 && p2 !== p1 ? `<a href="tel:${p2}" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1">
-                <span>📞 ${p2}</span>
-              </a>` : ''}
-              <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] flex items-center space-x-1">
-                <span>📍 Directions</span>
-              </a>
+              ${p1 ? `<a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-2 py-1 rounded-md text-[11px] shadow">📞 ${p1}</a>` : ''}
+              <button type="button" onclick="openWorkingHoursModal(${idx})" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-bold px-2 py-1 rounded-md text-[11px] flex items-center space-x-1">
+                <span>🕒 Hours</span>
+              </button>
+              <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-md text-[11px]">📍 Map</a>
             </div>
           </div>
         `;
@@ -309,6 +490,7 @@
       }
     }
 
+    // Scroll to and focus pin on map
     window.focusBranchOnMap = function(idx) {
       const marker = markersMap[idx];
       if (marker && map) {
@@ -323,80 +505,294 @@
       }
     };
 
-    // Load locations into grid & map
-    fetch('assets/data/locations.json')
-      .then(r => r.json())
-      .then(locations => {
-        initBranchMap(locations);
+    // Filter Logic
+    window.setCategoryFilter = function(category) {
+      currentCategory = category;
 
-        const grid = document.getElementById('branchListGrid');
-        const search = document.getElementById('branchSearch');
-        if (!grid) return;
+      // Update button styling
+      const buttons = {
+        all: document.getElementById('filterAllBtn'),
+        branch: document.getElementById('filterBranchBtn'),
+        agent: document.getElementById('filterAgentBtn')
+      };
 
-        function render(list) {
-          grid.innerHTML = list.map((loc, idx) => {
-            const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
-            const p1 = (loc.phone_no1 || '').trim();
-            const p2 = (loc.phone_no2 || '').trim();
-            const lat = parseFloat(loc.lat);
-            const lon = parseFloat(loc.lon);
-            const hasGps = (lat && lon && lat > 5 && lon > 79);
-            const isBranch = (loc.location_type === 1);
+      Object.keys(buttons).forEach(key => {
+        const btn = buttons[key];
+        if (!btn) return;
+        if (key === category) {
+          btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+          btn.classList.add('bg-amber-400', 'text-slate-950', 'shadow');
+        } else {
+          btn.classList.remove('bg-amber-400', 'text-slate-950', 'shadow');
+          btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+        }
+      });
 
-            return `
-              <div class="branch-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-                <div>
-                  <div class="flex items-start justify-between gap-2">
-                    <h4 class="font-extrabold text-slate-900 text-sm">${loc.name || 'LINK LANKA'}</h4>
-                    <span class="text-[10px] ${isBranch ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'} font-bold px-2 py-0.5 rounded shrink-0">
-                      ${isBranch ? 'OFFICIAL BRANCH' : 'DEALER'}
-                    </span>
-                  </div>
-                  <p class="text-xs text-slate-600 mt-2 flex items-start space-x-1.5">
-                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5"></i>
-                    <span>${cleanAddr}</span>
-                  </p>
+      applyFilters();
+    };
+
+    function applyFilters() {
+      const q = (document.getElementById('branchSearch')?.value || '').toLowerCase().trim();
+      
+      const filtered = allLocations.filter(loc => {
+        // Category filter
+        if (currentCategory === 'branch' && loc.location_type !== 1) return false;
+        if (currentCategory === 'agent' && loc.location_type !== 2) return false;
+
+        // Search query filter
+        if (q) {
+          const matchName = loc.name && loc.name.toLowerCase().includes(q);
+          const matchAddr = loc.address && loc.address.toLowerCase().includes(q);
+          const matchPhone = loc.phone_no1 && loc.phone_no1.includes(q);
+          if (!matchName && !matchAddr && !matchPhone) return false;
+        }
+
+        return true;
+      });
+
+      renderGrid(filtered);
+    }
+
+    // Render Cards in Directory Grid
+    function renderGrid(list) {
+      const grid = document.getElementById('branchListGrid');
+      const emptyState = document.getElementById('emptySearchState');
+      if (!grid) return;
+
+      if (list.length === 0) {
+        grid.innerHTML = '';
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+
+      grid.innerHTML = list.map((loc) => {
+        // Find original index in allLocations
+        const originalIdx = allLocations.indexOf(loc);
+        const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
+        const p1 = (loc.phone_no1 || '').trim();
+        const p2 = (loc.phone_no2 || '').trim();
+        const lat = parseFloat(loc.lat);
+        const lon = parseFloat(loc.lon);
+        const hasGps = (lat && lon && lat > 5 && lon > 79);
+        const isBranch = (loc.location_type === 1);
+        const badgeBg = isBranch ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white';
+        const badgeText = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORIZED DEALER';
+
+        // Card header thumbnail
+        let headerMedia = '';
+        if (loc.photo) {
+          headerMedia = `
+            <div class="h-44 bg-slate-900 rounded-2xl overflow-hidden relative mb-4">
+              <img src="assets/img/branches/${loc.photo}" onerror="this.onerror=null; this.src='assets/img/${loc.photo}';" alt="${loc.name}" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 ${badgeBg} text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
+                ${badgeText}
+              </span>
+            </div>
+          `;
+        } else {
+          headerMedia = `
+            <div class="h-24 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-4 flex items-center justify-between mb-4 border border-slate-700/60">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl ${isBranch ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white'} flex items-center justify-center font-black text-sm shadow">
+                  ${isBranch ? 'LL' : 'AG'}
                 </div>
-                
-                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs gap-2">
-                  <div class="flex flex-wrap gap-1.5">
-                    ${p1 ? `<a href="tel:${p1}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
-                      <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
-                      <span>${p1}</span>
-                    </a>` : ''}
-                    ${p2 && p2 !== p1 ? `<a href="tel:${p2}" class="bg-slate-100 hover:bg-amber-100 text-slate-800 font-bold px-2.5 py-1 rounded text-[11px] flex items-center space-x-1">
-                      <i data-lucide="phone" class="w-3 h-3 text-amber-500"></i>
-                      <span>${p2}</span>
-                    </a>` : ''}
-                  </div>
-                  ${hasGps ? `
-                    <button onclick="focusBranchOnMap(${idx})" class="text-amber-600 hover:text-amber-700 font-bold text-xs flex items-center space-x-1 cursor-pointer shrink-0">
-                      <span>View on Map</span>
-                      <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                    </button>
-                  ` : ''}
+                <div>
+                  <span class="text-xs font-bold text-white block">${isBranch ? 'Official Company Yard' : 'Authorized Dealer'}</span>
+                  <span class="text-[10px] text-slate-400 font-medium">Link Lanka Network</span>
                 </div>
               </div>
-            `;
-          }).join('');
-          lucide.createIcons();
+              <span class="${badgeBg} text-[9px] font-black uppercase px-2 py-0.5 rounded shadow">
+                ${badgeText}
+              </span>
+            </div>
+          `;
         }
 
-        render(locations);
+        return `
+          <div class="branch-card bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between hover-lift">
+            <div>
+              ${headerMedia}
+              <div class="space-y-1.5">
+                <h4 class="font-black text-slate-900 text-base leading-snug">${loc.name || 'LINK LANKA'}</h4>
+                <p class="text-xs text-slate-600 flex items-start space-x-1.5 leading-relaxed">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                  <span>${cleanAddr}</span>
+                </p>
+              </div>
+            </div>
+            
+            <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+              <div class="flex flex-wrap items-center gap-1.5">
+                ${p1 ? `
+                  <a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-[11px] flex items-center space-x-1 shadow-sm transition-colors">
+                    <i data-lucide="phone" class="w-3 h-3"></i>
+                    <span>${p1}</span>
+                  </a>` : ''}
+                ${p2 && p2 !== p1 ? `
+                  <a href="tel:${p2}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-2.5 py-1.5 rounded-xl text-[11px] flex items-center space-x-1">
+                    <span>${p2}</span>
+                  </a>` : ''}
+              </div>
 
-        if (search) {
-          search.addEventListener('input', (e) => {
-            const q = e.target.value.toLowerCase().trim();
-            const filtered = locations.filter(l => 
-              (l.name && l.name.toLowerCase().includes(q)) ||
-              (l.address && l.address.toLowerCase().includes(q)) ||
-              (l.phone_no1 && l.phone_no1.includes(q))
-            );
-            render(filtered);
-          });
+              <div class="flex items-center space-x-1.5">
+                <!-- Working Hours Pop-up Button -->
+                <button type="button" onclick="openWorkingHoursModal(${originalIdx})" class="inline-flex items-center space-x-1 text-slate-700 hover:text-amber-700 bg-slate-100 hover:bg-amber-50 border border-slate-200 px-2.5 py-1.5 rounded-xl font-bold text-[11px] transition-colors" title="View opening hours">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i>
+                  <span>Hours</span>
+                </button>
+
+                ${hasGps ? `
+                  <button type="button" onclick="focusBranchOnMap(${originalIdx})" class="text-slate-600 hover:text-amber-600 p-1.5 rounded-xl hover:bg-slate-100 font-bold text-xs flex items-center space-x-1 cursor-pointer transition-colors" title="Show on map">
+                    <i data-lucide="map" class="w-4 h-4 text-amber-500"></i>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Modal Handler: Open Working Hours Modal
+    window.openWorkingHoursModal = function(idx) {
+      const loc = allLocations[idx];
+      if (!loc) return;
+
+      const modal = document.getElementById('workingHoursModal');
+      const nameEl = document.getElementById('modalLocName');
+      const addrEl = document.getElementById('modalLocAddress');
+      const badgeEl = document.getElementById('modalLocTypeBadge');
+      const statusEl = document.getElementById('modalLiveStatusBadge');
+      const callBtn = document.getElementById('modalCallBtn');
+      const dirBtn = document.getElementById('modalDirectionsBtn');
+      const tbody = document.getElementById('modalHoursTableBody');
+
+      if (!modal) return;
+
+      const isBranch = (loc.location_type === 1);
+      nameEl.textContent = loc.name || 'LINK LANKA';
+      addrEl.textContent = (loc.address || '').replace(/\\n|\n/g, ', ');
+
+      badgeEl.textContent = isBranch ? 'OFFICIAL BRANCH' : 'AUTHORIZED DEALER';
+      badgeEl.className = isBranch 
+        ? 'px-2 py-0.5 rounded text-[10px] font-black uppercase bg-amber-400 text-slate-950'
+        : 'px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-500 text-white';
+
+      const p1 = (loc.phone_no1 || '').trim();
+      if (p1) {
+        callBtn.href = 'tel:' + p1;
+        callBtn.style.display = 'flex';
+      } else {
+        callBtn.style.display = 'none';
+      }
+
+      const lat = parseFloat(loc.lat);
+      const lon = parseFloat(loc.lon);
+      if (lat && lon) {
+        dirBtn.href = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+        dirBtn.style.display = 'flex';
+      } else {
+        dirBtn.style.display = 'none';
+      }
+
+      const daysOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const todayDayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()];
+
+      const hoursObj = loc.working_hours || {};
+      const todayHours = hoursObj[todayDayName] || (isBranch ? (todayDayName === 'Sunday' ? 'Closed' : '8:00 AM - 6:00 PM') : (todayDayName === 'Sunday' ? 'Closed' : '8:30 AM - 6:00 PM'));
+      const isClosedToday = todayHours.toLowerCase().includes('closed');
+
+      statusEl.textContent = isClosedToday ? '● Closed Today' : '● Open Today';
+      statusEl.className = isClosedToday 
+        ? 'px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600'
+        : 'px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800';
+
+      tbody.innerHTML = daysOrder.map(day => {
+        const isToday = (day === todayDayName);
+        const h = hoursObj[day] || (isBranch ? (day === 'Sunday' ? 'Closed' : '8:00 AM - 6:00 PM') : (day === 'Sunday' ? 'Closed' : '8:30 AM - 6:00 PM'));
+        const isClosed = h.toLowerCase().includes('closed');
+
+        const rowBg = isToday ? 'bg-amber-50 font-bold text-amber-950' : 'hover:bg-slate-50 text-slate-700';
+
+        return `
+          <tr class="${rowBg} transition-colors">
+            <td class="py-2.5 px-4 flex items-center space-x-1.5">
+              <span>${day}</span>
+              ${isToday ? `<span class="bg-amber-400 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm">TODAY</span>` : ''}
+            </td>
+            <td class="py-2.5 px-4 text-right">
+              ${isClosed 
+                ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-600">Closed</span>`
+                : `<span class="font-mono text-xs ${isToday ? 'text-amber-900 font-extrabold' : 'text-slate-800 font-semibold'}">${h}</span>`
+              }
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    };
+
+    window.closeWorkingHoursModal = function() {
+      const modal = document.getElementById('workingHoursModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    };
+
+    // Close on click outside modal
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('workingHoursModal');
+      if (modal && e.target === modal) {
+        closeWorkingHoursModal();
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeWorkingHoursModal();
+      }
+    });
+
+    // Main Init
+    loadLocationsData()
+      .then(locations => {
+        allLocations = locations;
+
+        // Update counts
+        const totalCount = locations.length;
+        const branchCount = locations.filter(l => l.location_type === 1).length;
+        const agentCount = locations.filter(l => l.location_type === 2).length;
+
+        const countAll = document.getElementById('countAll');
+        const countBranch = document.getElementById('countBranch');
+        const countAgent = document.getElementById('countAgent');
+
+        if (countAll) countAll.textContent = totalCount;
+        if (countBranch) countBranch.textContent = branchCount;
+        if (countAgent) countAgent.textContent = agentCount;
+
+        // Initialize Map
+        initBranchMap(locations);
+
+        // Render Directory
+        renderGrid(locations);
+
+        // Search Listener
+        const searchInput = document.getElementById('branchSearch');
+        if (searchInput) {
+          searchInput.addEventListener('input', applyFilters);
         }
       })
-      .catch(err => console.error('Error loading locations:', err));
+      .catch(err => console.error('Error initializing locations:', err));
   </script>
 </body>
 </html>

@@ -1,464 +1,800 @@
 [
   {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "LINK LANKA",
-    "address": "NO - 147/2,\nCOLOMBO ROAD, BANDARAWATHA,\nBIYAGAMA.",
-    "phone_no1": "0705403182",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.727015,
-    "lon": 79.900465,
-    "name": "LINK LANKA",
-    "address": "NO - 176/(222),\nMODARA ROAD, EGODAUYANA,\nMORATUWA.",
-    "phone_no1": "0767709823",
-    "phone_no2": "0767709823"
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.828796,
-    "lon": 79.911722,
-    "name": "LINK LANKA",
-    "address": "NO - 66A/2,\nHORANA ROAD, KATUWAWALA,\nBORALASGAMUWA.",
-    "phone_no1": "0778416872",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.839026,
-    "lon": 79.929486,
-    "name": "LINK LANKA,",
-    "address": "NO - 173/A,\nPILIYANDALA ROAD,\nMAHARAGAMA.",
-    "phone_no1": "0767277495",
-    "phone_no2": "0772770277"
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.840544,
-    "lon": 79.996932,
-    "name": "LINK LANKA",
-    "address": "NO - 238/3,\nWALAWWA JUNCTION, HIGH LEVEL ROAD,\nHOMAGAMA.",
-    "phone_no1": "0772522693",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.88033,
-    "lon": 79.874873,
-    "name": "LINK LANKA",
-    "address": "NO. 38,\nKIRULAPONE AVENUE,\nCOLOMBO 05.",
-    "phone_no1": "0774617846",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.882076,
-    "lon": 79.875043,
-    "name": "LINK LANKA - SERVICE CENTRE",
-    "address": "NO. 85,\nKIRULAPONE AVENUE,\nCOLOMBO 05.",
+    "name": "SERVICE CENTRE (85)",
+    "address": "NO. 85, KIRULAPONE AVENUE, COLOMBO 05.",
     "phone_no1": "0705403185",
-    "phone_no2": "          "
+    "phone_no2": "",
+    "lon": 79.875043,
+    "lat": 6.882076,
+    "photo": "yard-head-office.jpg",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "HEAD OFFICE (38)",
+    "address": "NO. 38, KIRULAPONE AVENUE, COLOMBO 05.",
+    "phone_no1": "0774617846",
+    "phone_no2": "",
+    "lon": 79.874873,
+    "lat": 6.88033,
+    "photo": "yard-kirulapona.png",
     "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.021723,
-    "lon": 79.974398,
-    "name": "LINK LANKA",
-    "address": "NO - 419/C,\nRANMUTHUGALA,\nKADAWATHA.",
-    "phone_no1": "0705403184",
-    "phone_no2": "          "
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "THALAHENA",
+    "address": "8th MILE POST, THALANGAMA NORTH BATHARAMULLA.",
+    "phone_no1": "0772521847",
+    "phone_no2": "",
+    "lon": 79.940704,
+    "lat": 6.908501,
+    "photo": "yard-thalahena.png",
     "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.093999,
-    "lon": 79.887804,
-    "name": "LINK LANKA",
-    "address": "NO:03/D/1\nTHUDELLA\nJA ELA.",
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "KATUWAWALA",
+    "address": "NO - 66A/2, HORANA ROAD, KATUWAWALA, BORALASGAMUWA.",
+    "phone_no1": "0778416872",
+    "phone_no2": "",
+    "lon": 79.911722,
+    "lat": 6.828796,
+    "photo": "yard-katuwawala.png",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "JA-ELA",
+    "address": "NO:03/D/1 THUDELLA JA ELA.",
     "phone_no1": "0778105314",
-    "phone_no2": "          "
-  },
-  {
+    "phone_no2": "",
+    "lon": 79.887804,
+    "lat": 7.093999,
+    "photo": "yard-jaela.png",
     "location_type": 1,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.284156,
-    "lon": 80.626272,
-    "name": "LINK LANKA",
-    "address": "NO - 39 B\nDHARMASHOKA MAWATHA,ARUPPOLA\nKANDY",
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "MAHARAGAMA",
+    "address": "NO - 173/A, PILIYANDALA ROAD, MAHARAGAMA.",
+    "phone_no1": "0767277495",
+    "phone_no2": "",
+    "lon": 79.929486,
+    "lat": 6.839026,
+    "photo": "",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "HOMAGAMA",
+    "address": "NO - 238/3, WALAWWA JUNCTION, HIGH LEVEL ROAD, HOMAGAMA.",
+    "phone_no1": "0772522693",
+    "phone_no2": "",
+    "lon": 79.996932,
+    "lat": 6.840544,
+    "photo": "",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "KADAWATHA",
+    "address": "NO - 419/C, RANMUTHUGALA, KADAWATHA.",
+    "phone_no1": "0705403184",
+    "phone_no2": "",
+    "lon": 79.974398,
+    "lat": 7.021723,
+    "photo": "yard-kadawatha.png",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "MORATUWA",
+    "address": "NO - 176/(222), MODARA ROAD, EGODAUYANA, MORATUWA.",
+    "phone_no1": "0767709823",
+    "phone_no2": "",
+    "lon": 79.900465,
+    "lat": 6.727015,
+    "photo": "",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "KADUWELA",
+    "address": "NO - 147/2, COLOMBO ROAD, BANDARAWATHA, BIYAGAMA.",
+    "phone_no1": "0705403182",
+    "phone_no2": "",
+    "lon": 79.98582,
+    "lat": 6.941367,
+    "photo": "",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "KANDY - NEW",
+    "address": "NO - 39 B DHARMASHOKA MAWATHA,ARUPPOLA KANDY",
     "phone_no1": "0771153291",
-    "phone_no2": "          "
+    "phone_no2": "",
+    "lon": 80.626272,
+    "lat": 7.284156,
+    "photo": "yard-peradeniya.png",
+    "location_type": 1,
+    "working_hours": {
+      "Monday": "8:00 AM - 6:00 PM",
+      "Tuesday": "8:00 AM - 6:00 PM",
+      "Wednesday": "8:00 AM - 6:00 PM",
+      "Thursday": "8:00 AM - 6:00 PM",
+      "Friday": "8:00 AM - 6:00 PM",
+      "Saturday": "8:00 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "AROMA STORES - KELANIYA",
-    "address": "NO - 227/3,\nMEEGAHAWATHA, WANAWASALA,\nKELANIYA.",
-    "phone_no1": "0707905000",
-    "phone_no2": "0112949065"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "DAKSHINA LINK LANKA - NEW",
-    "address": "KOGGALA KADE JUNCTION,\nWAKWELLA,\nGALLE",
-    "phone_no1": "0771025994",
-    "phone_no2": "0718284604"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "ISURU METER - THALAWATHUGODA",
-    "address": "NO - 15,\nNEW SHOPPING COMPLEX,\nTHALAWATHUGODA.",
-    "phone_no1": "0716576984",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "R M R ENTERPRISES - WATTALA",
-    "address": "NO - 379,\nHANDALA ROAD,\nWATTALA",
-    "phone_no1": "0755626223",
-    "phone_no2": "0724648596"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "SHAMAL ENTERPRISES - BELIATHA",
-    "address": "NO - 325, PATHINIGEWATHA,\nJAYA MAWATHA, KUDA HILLA,\nBELIATHA.",
-    "phone_no1": "0778881212",
-    "phone_no2": "0717964141"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 0.0,
-    "lon": 0.0,
-    "name": "UPUL MOTORS - KUMBUKGATE",
-    "address": "WALIHARAGEDARA,\nKUMBUKGATE.\n",
-    "phone_no1": "0716133710",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.050547,
-    "lon": 80.629834,
-    "name": "WIJAYA ELECTRONICS",
-    "address": "NO - 17,\nHAKMANA ROAD, KIRINDA,\nPUHULWELLA.",
-    "phone_no1": "0412287435",
-    "phone_no2": "0778755565"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.146312,
-    "lon": 81.126747,
-    "name": "JAYALAL MOTORS - HAMBANTHOTA",
-    "address": "NO - 52,\nSIRIBOPURA ROAD,\nHAMBANTHOTA.",
-    "phone_no1": "0713095011",
-    "phone_no2": "0713095011"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.225269,
-    "lon": 80.115374,
-    "name": "LASINDU MOTORS",
-    "address": "GALAGODATHA ROAR,\n8 MILE POST,\nBATAPOLA.",
-    "phone_no1": "0777069296",
-    "phone_no2": "0777069296"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.326076,
-    "lon": 80.849034,
-    "name": "AMARAJEEWA MODERN CENTER - AMBILIPITIYA",
-    "address": "NEW TOWN ROAD,\nAMBILIPITIYA.\n",
-    "phone_no1": "0716174191",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.517794,
-    "lon": 80.174837,
-    "name": "R A P ENTERPRISES - AGALAWATHA",
-    "address": "NO : 83,\nKITHULGODA ROAD,\nAGALAWATHA.",
-    "phone_no1": "0777651612",
-    "phone_no2": "0718915480"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.525701,
-    "lon": 80.088703,
-    "name": "RASIKA MOTORS",
-    "address": "KALUTHARA ROAD,\nKADAWAKA,\nMATHUGAMA.",
-    "phone_no1": "0765489640",
-    "phone_no2": "0765489640"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.809044,
-    "lon": 79.88099,
-    "name": "YASANGA ELECTRONIC",
-    "address": "NO - 124,\nKALDEMULLA ROAD,\nRATHMALANA.",
-    "phone_no1": "0774132301",
-    "phone_no2": "0784757931"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.839637,
-    "lon": 79.883105,
-    "name": "HIRUNI ENTERPRISES",
-    "address": "NO - 40,\nPARAKUM MAWATHA, ATHIDIYA,\nDEHIWALA.",
-    "phone_no1": "0729158818",
-    "phone_no2": "0729158818"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.890093,
-    "lon": 79.904187,
-    "name": "PALITHA ELECTRICAL",
-    "address": "NO - 08,\nBADDAGANA ROAD,\nKOTTE.",
-    "phone_no1": "0714763759",
-    "phone_no2": "0714763759"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.906868,
-    "lon": 79.889245,
-    "name": "MANEESHA ENTERPRISES",
-    "address": "NO - 14/1, NATIONAL HOUSE SCHEME,\nBANDARANAYAKEPURA,\nRAJAGIRIYA.",
-    "phone_no1": "0753299836",
-    "phone_no2": "0117046495"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.919454,
-    "lon": 79.911341,
-    "name": "AJANTHA METER TAXI",
-    "address": "NO - 119/1, HIKGAHAWATTHA,\nBUDGAMUVA RD, KALAPOLUVAVA,\nRAJAGIRIYA.",
-    "phone_no1": "0776199450",
-    "phone_no2": "0723297050"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.935537,
-    "lon": 79.85588,
-    "name": "G S AUTO ENGINEERING",
-    "address": "NO - 52,\nLONDON MARKET, SONDERS PLACE,\nCOLOMBO- 12",
-    "phone_no1": "0772340340",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.940652,
-    "lon": 79.873479,
-    "name": "S S AUDIO",
-    "address": "NO - 765/81A, N H S, BODIRAJARAMA MAWATHA,\nMALIGAWATHTHA,\nCOLOMBO-10.",
-    "phone_no1": "0776112587",
-    "phone_no2": "0112676697"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.944372,
-    "lon": 79.879118,
-    "name": "BANUJA MOTORS",
-    "address": "NO - 48,\nAVISSAWELLA ROAD,\nORUGODAWATHTHA.",
+    "name": "BANUJA MOTORS - NEW",
+    "address": "NO - 48, AVISSAWELLA ROAD, ORUGODAWATHTHA.",
     "phone_no1": "0779172642",
-    "phone_no2": "0754107196"
+    "phone_no2": "",
+    "lon": 79.879118,
+    "lat": 6.944372,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.948281,
-    "lon": 79.987177,
-    "name": "SHANTHA MOTORS",
-    "address": "NO - 409/G,\nKOTTUNNA ROAD, GANEWATHA,\nBIYAGAMA.",
-    "phone_no1": "0726371344",
-    "phone_no2": "0726371344"
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.949602,
-    "lon": 79.859617,
-    "name": "JUNAL TOURS",
-    "address": "NO - 3/802A,\nFARM ROAD, MATTAKKULIYA,\nCOLOMBO 15.",
+    "name": "JUNAL TOURS - NEW",
+    "address": "NO - 3/802A, FARM ROAD, MATTAKKULIYA, COLOMBO 15.",
     "phone_no1": "0114385477",
-    "phone_no2": "0114385477"
+    "phone_no2": "",
+    "lon": 79.859617,
+    "lat": 6.949602,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "G S AUTO-PETTAH - NEW",
+    "address": "NO - 52, LONDON MARKET, SONDERS PLACE, COLOMBO- 12",
+    "phone_no1": "0772340340",
+    "phone_no2": "",
+    "lon": 79.85588,
+    "lat": 6.935537,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.958895,
-    "lon": 79.876128,
-    "name": "SAFA AUTO",
-    "address": "NO - 183,\nMAHAWATHTHA,\nCOLOMBO 14.",
-    "phone_no1": "0772867370",
-    "phone_no2": "0757849192"
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "AJANTHA COM - NEW",
+    "address": "NO - 119/1, HIKGAHAWATTHA, BUDGAMUVA RD, KALAPOLUVAVA, RAJAGIRIYA.",
+    "phone_no1": "0776199450",
+    "phone_no2": "",
+    "lon": 79.911341,
+    "lat": 6.919454,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.976633,
-    "lon": 79.881117,
-    "name": "R M R ENTERPRISES",
-    "address": "NO - 102/69,\nSRI WICRAMAPURA, MATTAKKULIYA,\nCOLOMBO 15.",
-    "phone_no1": "0756347515",
-    "phone_no2": "0750709079"
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "HIRUNI ENTERPRISES",
+    "address": "NO - 40, PARAKUM MAWATHA, ATHIDIYA, DEHIWALA.",
+    "phone_no1": "0729158818",
+    "phone_no2": "",
+    "lon": 79.883105,
+    "lat": 6.839637,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 6.980283,
-    "lon": 79.929925,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
     "name": "GIVINDU ENTERPRISES - KIRIBATHGODA",
-    "address": "NO - 70,\nOLD SUPERMARKET,\nKIRIBATHGODA.",
+    "address": "NO - 70, OLD SUPERMARKET, KIRIBATHGODA.",
     "phone_no1": "0716570623",
-    "phone_no2": "0716570623"
+    "phone_no2": "",
+    "lon": 79.929925,
+    "lat": 6.980283,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "S S AUDIO",
+    "address": "NO - 765/81A, N H S, BODIRAJARAMA MAWATHA, MALIGAWATHTHA, COLOMBO-10.",
+    "phone_no1": "0776112587",
+    "phone_no2": "",
+    "lon": 79.873479,
+    "lat": 6.940652,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.072762,
-    "lon": 80.015558,
-    "name": "NUSHA MOTORS",
-    "address": "NO - 93,\nKANDY ROAD,\nTHIHARIYA.",
-    "phone_no1": "0774050464",
-    "phone_no2": "0776340054"
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "SHANTHA MOTORS",
+    "address": "NO - 409/G, KOTTUNNA ROAD, GANEWATHA, BIYAGAMA.",
+    "phone_no1": "0726371344",
+    "phone_no2": "",
+    "lon": 79.987177,
+    "lat": 6.948281,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.251924,
-    "lon": 80.434901,
-    "name": "NEW GOURY ENTERPRISES",
-    "address": "NO - 431/1,\nKANDY ROAD, ANWARAMA,\nMAWANALLA.",
-    "phone_no1": "0772297022",
-    "phone_no2": "0772297022"
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "YASANGA ELECTRONIC",
+    "address": "NO - 124, KALDEMULLA ROAD, RATHMALANA.",
+    "phone_no1": "0774132301",
+    "phone_no2": "",
+    "lon": 79.88099,
+    "lat": 6.809044,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.292694,
-    "lon": 81.672281,
-    "name": "A R B MOTORS",
-    "address": "NO - 789/B, CEYLON ROAD,\nSAINDA MARUTHU - 17\nAMPARA.",
-    "phone_no1": "0772382178",
-    "phone_no2": "          "
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "R A P ENTERPRISES - AGALAWATHA",
+    "address": "NO : 83, KITHULGODA ROAD, AGALAWATHA.",
+    "phone_no1": "0777651612",
+    "phone_no2": "",
+    "lon": 80.174837,
+    "lat": 6.517794,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.461084,
-    "lon": 80.110216,
-    "name": "DISSANAYAKE MOTORS",
-    "address": "NO - 62,\nPUGALLA WATHA,\nKITHALAWA.",
-    "phone_no1": "0715700700",
-    "phone_no2": "0715700700"
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 7.5167,
-    "lon": 81.78681,
-    "name": "KOBIKAN",
-    "address": "PALLAIYAR KOVIL ROAD,\nKALUWANCHIKUDY.\n",
-    "phone_no1": "0753659592",
-    "phone_no2": "          "
-  },
-  {
-    "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 8.321206,
-    "lon": 80.402484,
     "name": "DUMINDA AUTO TRADERS",
-    "address": "NO - 521/47,\n5 TH LANE, NEW TOWN,\nANURADHAPURA.",
+    "address": "NO - 521/47, 5 TH LANE, NEW TOWN, ANURADHAPURA.",
     "phone_no1": "0773271123",
-    "phone_no2": "0775119890"
+    "phone_no2": "",
+    "lon": 80.402484,
+    "lat": 8.321206,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   },
   {
+    "name": "A R B MOTORS - AMPARA",
+    "address": "NO - 789/B, CEYLON ROAD, SAINDA MARUTHU - 17 AMPARA.",
+    "phone_no1": "0772382178",
+    "phone_no2": "",
+    "lon": 81.672281,
+    "lat": 7.292694,
+    "photo": "",
     "location_type": 2,
-    "agent_id": null,
-    "branch_id": null,
-    "lat": 9.667185,
-    "lon": 80.009046,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "NUSHA MOTORS",
+    "address": "NO - 93, KANDY ROAD, THIHARIYA.",
+    "phone_no1": "0774050464",
+    "phone_no2": "",
+    "lon": 80.015558,
+    "lat": 7.072762,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "RASIKA MOTORS - MATHUGAMA",
+    "address": "KALUTHARA ROAD, KADAWAKA, MATHUGAMA.",
+    "phone_no1": "0765489640",
+    "phone_no2": "",
+    "lon": 80.088703,
+    "lat": 6.525701,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "NEW GOURY ENTERPRISES",
+    "address": "NO - 431/1, KANDY ROAD, ANWARAMA, MAWANALLA.",
+    "phone_no1": "0772297022",
+    "phone_no2": "",
+    "lon": 80.434901,
+    "lat": 7.251924,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "R M R ENTERPRISES - KOTAHENA",
+    "address": "NO - 102/69, SRI WICRAMAPURA, MATTAKKULIYA, COLOMBO 15.",
+    "phone_no1": "0756347515",
+    "phone_no2": "",
+    "lon": 79.881117,
+    "lat": 6.976633,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "MANEESHA",
+    "address": "NO - 14/1, NATIONAL HOUSE SCHEME, BANDARANAYAKEPURA, RAJAGIRIYA.",
+    "phone_no1": "0753299836",
+    "phone_no2": "",
+    "lon": 79.889245,
+    "lat": 6.906868,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "DISSANAYAKE MOTORS",
+    "address": "NO - 62, PUGALLA WATHA, KITHALAWA.",
+    "phone_no1": "0715700700",
+    "phone_no2": "",
+    "lon": 80.110216,
+    "lat": 7.461084,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "LASINDU MOTORS - BATAPOLA",
+    "address": "GALAGODATHA ROAR, 8 MILE POST, BATAPOLA.",
+    "phone_no1": "0777069296",
+    "phone_no2": "",
+    "lon": 80.115374,
+    "lat": 6.225269,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "JAYALAL MOTORS - HAMBANTHOTA",
+    "address": "NO - 52, SIRIBOPURA ROAD, HAMBANTHOTA.",
+    "phone_no1": "0713095011",
+    "phone_no2": "",
+    "lon": 81.126747,
+    "lat": 6.146312,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "WIJAYA ELECTRONICS - KIRINDA",
+    "address": "NO - 17, HAKMANA ROAD, KIRINDA, PUHULWELLA.",
+    "phone_no1": "412287435",
+    "phone_no2": "",
+    "lon": 80.629834,
+    "lat": 6.050547,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
     "name": "SANSAKTHY TRADERS",
-    "address": "MAAMPALAM JUNCTION,\nA9 ROAD,\nJAFFNA.",
+    "address": "MAAMPALAM JUNCTION, A9 ROAD, JAFFNA.",
     "phone_no1": "0775527099",
-    "phone_no2": "0212217994"
+    "phone_no2": "",
+    "lon": 80.009046,
+    "lat": 9.667185,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "R M R ENTERPRISES - WATTALA",
+    "address": "NO - 379, HANDALA ROAD, WATTALA",
+    "phone_no1": "0755626223",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "SHAMAL ENTERPRISES - BELIATHA",
+    "address": "NO - 325, PATHINIGEWATHA, JAYA MAWATHA, KUDA HILLA, BELIATHA.",
+    "phone_no1": "0778881212",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "UPUL MOTORS - KUMBUKGATE",
+    "address": "WALIHARAGEDARA, KUMBUKGATE.",
+    "phone_no1": "0716133710",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "AROMA STORES - KELANIYA",
+    "address": "NO - 227/3, MEEGAHAWATHA, WANAWASALA, KELANIYA.",
+    "phone_no1": "0707905000",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "DAKSHINA LINK LANKA - NEW",
+    "address": "KOGGALA KADE JUNCTION, WAKWELLA, GALLE",
+    "phone_no1": "0771025994",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "PALITHA ELECTRICAL",
+    "address": "NO - 08, BADDAGANA ROAD, KOTTE.",
+    "phone_no1": "0714763759",
+    "phone_no2": "",
+    "lon": 79.904187,
+    "lat": 6.890093,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "ISURU METER - THALAWATHUGODA",
+    "address": "NO - 15, NEW SHOPPING COMPLEX, THALAWATHUGODA.",
+    "phone_no1": "0716576984",
+    "phone_no2": "",
+    "lon": 0,
+    "lat": 0,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "KOBIKAN",
+    "address": "PALLAIYAR KOVIL ROAD, KALUWANCHIKUDY.",
+    "phone_no1": "0753659592",
+    "phone_no2": "",
+    "lon": 81.78681,
+    "lat": 7.5167,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
+  },
+  {
+    "name": "AMARAJEEWA MODERN CENTER - AMBILIPITIYA",
+    "address": "NEW TOWN ROAD, AMBILIPITIYA.",
+    "phone_no1": "0716174191",
+    "phone_no2": "",
+    "lon": 80.849034,
+    "lat": 6.326076,
+    "photo": "",
+    "location_type": 2,
+    "working_hours": {
+      "Monday": "8:30 AM - 6:00 PM",
+      "Tuesday": "8:30 AM - 6:00 PM",
+      "Wednesday": "8:30 AM - 6:00 PM",
+      "Thursday": "8:30 AM - 6:00 PM",
+      "Friday": "8:30 AM - 6:00 PM",
+      "Saturday": "8:30 AM - 5:00 PM",
+      "Sunday": "Closed"
+    }
   }
 ]

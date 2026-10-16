@@ -330,8 +330,68 @@ function initHomeMap() {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  fetch('assets/data/locations.json')
-    .then(r => r.json())
+  function cleanPhone(val) {
+    if (val === undefined || val === null) return '';
+    let s = String(val).trim();
+    if (s.endsWith('.0')) s = s.slice(0, -2);
+    if (/^\d{9}$/.test(s)) s = '0' + s;
+    return s;
+  }
+
+  async function getLocations() {
+    try {
+      if (typeof XLSX === 'undefined') throw new Error('SheetJS not loaded');
+      const res = await fetch('assets/data/locations.xlsx');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const buffer = await res.arrayBuffer();
+      const wb = XLSX.read(buffer, { type: 'array' });
+      const list = [];
+
+      const branchSheetName = wb.SheetNames.find(n => n.toLowerCase().includes('branch')) || wb.SheetNames[1];
+      if (branchSheetName && wb.Sheets[branchSheetName]) {
+        const rows = XLSX.utils.sheet_to_json(wb.Sheets[branchSheetName], { defval: '' });
+        rows.forEach(r => {
+          const name = (r.Description || r.AgentName || r.Name || '').trim();
+          if (!name) return;
+          list.push({
+            name: name,
+            address: String(r.Address || '').trim(),
+            phone_no1: cleanPhone(r.Telephone1),
+            lon: parseFloat(r.Longitude) || 0,
+            lat: parseFloat(r.Latitude) || 0,
+            photo: String(r.Photo || '').trim(),
+            location_type: 1
+          });
+        });
+      }
+
+      const agentSheetName = wb.SheetNames.find(n => n.toLowerCase().includes('agent')) || wb.SheetNames[0];
+      if (agentSheetName && wb.Sheets[agentSheetName]) {
+        const rows = XLSX.utils.sheet_to_json(wb.Sheets[agentSheetName], { defval: '' });
+        rows.forEach(r => {
+          const name = (r.AgentName || r.Description || r.Name || '').trim();
+          if (!name) return;
+          list.push({
+            name: name,
+            address: String(r.Address || '').trim(),
+            phone_no1: cleanPhone(r.Telephone1),
+            lon: parseFloat(r.Longitude) || 0,
+            lat: parseFloat(r.Latitude) || 0,
+            photo: String(r.Photo || '').trim(),
+            location_type: 2
+          });
+        });
+      }
+
+      if (list.length > 0) return list;
+      throw new Error('No entries in Excel');
+    } catch (e) {
+      const res = await fetch('assets/data/locations.json');
+      return await res.json();
+    }
+  }
+
+  getLocations()
     .then(locations => {
       const bounds = [];
       locations.forEach(loc => {
@@ -361,14 +421,18 @@ function initHomeMap() {
 
         const cleanAddr = (loc.address || '').replace(/\\n|\n/g, ', ');
         const p1 = (loc.phone_no1 || '').trim();
+        const photoHtml = loc.photo 
+          ? `<div class="h-20 w-full rounded-md overflow-hidden mb-1.5 bg-slate-900"><img src="assets/img/branches/${loc.photo}" onerror="this.onerror=null; this.src='assets/img/${loc.photo}';" alt="${loc.name}" class="w-full h-full object-cover"></div>` 
+          : '';
 
         const popupHtml = `
-          <div class="text-left font-sans text-xs">
+          <div class="text-left font-sans text-xs max-w-[220px]">
+            ${photoHtml}
             <span class="px-2 py-0.5 rounded text-[10px] uppercase tracking-wider ${badgeBg} inline-block mb-1">
               ${badgeText}
             </span>
             <h4 class="font-extrabold text-sm text-white mb-0.5">${loc.name || 'LINK LANKA'}</h4>
-            <p class="text-slate-300 leading-snug mb-2">${cleanAddr}</p>
+            <p class="text-slate-300 leading-snug mb-2 text-[11px]">${cleanAddr}</p>
             <div class="flex items-center space-x-2 pt-1.5 border-t border-slate-700/80">
               ${p1 ? `<a href="tel:${p1}" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-2 py-1 rounded-md text-[11px] shadow">📞 ${p1}</a>` : ''}
               <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-2 py-1 rounded-md text-[11px]">📍 Directions</a>
